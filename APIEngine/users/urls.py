@@ -1,0 +1,11 @@
+from .views import ( login, logout, session_details, who_am_i )
+from django.conf.urls import url, include
+
+urlpatterns = [
+    url(r'^sessiondetails/', session_details, name='session_detail'),
+    url(r'^login/', login, name='login_view'),
+    url(r'^logout/', logout, name='logout_view'),
+    url(r'^whoami/', who_am_i, name='whoami'),
+    
+    # url(r'^article/(\d+)/', 'viewArticle', name = 'article'),
+]
