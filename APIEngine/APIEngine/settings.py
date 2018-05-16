@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+
+    'users',
+    'blogs'
 ]
 
 MIDDLEWARE = [
@@ -123,15 +126,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
 
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'APIEngine', 'static'),
+)
 
-# STATIC_URL = '/static/'
-# MEDIA_URL = '/media/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_root_files')
 
-# STATICFILES_DIRS = (
-#     os.path.join(BASE_DIR, 'ecommerce_app', 'static'),
-# )
-
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static_root_files')
-
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root_files', 'images')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root_files', 'images')

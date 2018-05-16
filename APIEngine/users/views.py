@@ -3,8 +3,47 @@ from __future__ import unicode_literals
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.db.models import Q
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render
+from .models import Profile
+
+# For Rest framework API
+from rest_framework.filters import ( SearchFilter, OrderingFilter, )
+from rest_framework.generics import ( CreateAPIView, DestroyAPIView, ListAPIView, UpdateAPIView,
+    RetrieveAPIView, RetrieveUpdateAPIView )
+
+from rest_framework.permissions import ( AllowAny, IsAuthenticated, IsAdminUser, 
+    IsAuthenticatedOrReadOnly, )
+
+# from .pagination import PostLimitOffsetPagination, PostPageNumberPagination
+# from .permissions import IsOwnerOrReadOnly
+
+from .serializers import ( ProfileListSerializer )
+
+
+
+# LISTS API
+class ProfileListAPIView(ListAPIView):
+    serializer_class = ProfileListSerializer
+    filter_backends= [ SearchFilter, OrderingFilter ]
+    permission_classes = [ IsAdminUser ]
+    search_fields = ['bio', 'location', 'user__first_name', 'user__username', 'user__last_name']
+    # pagination_class = PostPageNumberPagination #PageNumberPagination
+
+    def get_queryset(self, *args, **kwargs):
+        queryset_list = Profile.objects.all() #filter(user=self.request.user)
+        query = self.request.GET.get("q")
+        if query:
+            queryset_list = queryset_list.filter(
+                    Q(bio__icontains=query)|
+                    Q(location__icontains=query)|
+                    Q(phone__icontains=query)|
+                    Q(user__username__icontains=query) |
+                    Q(user__first_name__icontains=query) |
+                    Q(user__last_name__icontains=query)
+                    ).distinct()
+        return queryset_list
 
 
 def session_details(request):
