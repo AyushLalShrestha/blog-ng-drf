@@ -9,40 +9,40 @@ from django.shortcuts import render
 from .models import Profile
 
 # For Rest framework API
-from rest_framework.filters import ( SearchFilter, OrderingFilter, )
-from rest_framework.generics import ( CreateAPIView, DestroyAPIView, ListAPIView, UpdateAPIView,
-    RetrieveAPIView, RetrieveUpdateAPIView )
+from rest_framework.filters import (SearchFilter, OrderingFilter, )
+from rest_framework.generics import (CreateAPIView, DestroyAPIView, ListAPIView, UpdateAPIView,
+                                     RetrieveAPIView, RetrieveUpdateAPIView)
 
-from rest_framework.permissions import ( AllowAny, IsAuthenticated, IsAdminUser, 
-    IsAuthenticatedOrReadOnly, )
+from rest_framework.permissions import (AllowAny, IsAuthenticated, IsAdminUser,
+                                        IsAuthenticatedOrReadOnly, )
 
 # from .pagination import PostLimitOffsetPagination, PostPageNumberPagination
 # from .permissions import IsOwnerOrReadOnly
-
-from .serializers import ( ProfileListSerializer )
-
-
+from .serializers import (ProfileListSerializer)
 
 # LISTS API
+
+
 class ProfileListAPIView(ListAPIView):
     serializer_class = ProfileListSerializer
-    filter_backends= [ SearchFilter, OrderingFilter ]
-    permission_classes = [ IsAdminUser ]
-    search_fields = ['bio', 'location', 'user__first_name', 'user__username', 'user__last_name']
+    filter_backends = [SearchFilter, OrderingFilter]
+    permission_classes = [IsAdminUser]
+    search_fields = ['bio', 'location', 'user__first_name',
+                     'user__username', 'user__last_name']
     # pagination_class = PostPageNumberPagination #PageNumberPagination
 
     def get_queryset(self, *args, **kwargs):
-        queryset_list = Profile.objects.all() #filter(user=self.request.user)
+        queryset_list = Profile.objects.all()  # filter(user=self.request.user)
         query = self.request.GET.get("q")
         if query:
             queryset_list = queryset_list.filter(
-                    Q(bio__icontains=query)|
-                    Q(location__icontains=query)|
-                    Q(phone__icontains=query)|
-                    Q(user__username__icontains=query) |
-                    Q(user__first_name__icontains=query) |
-                    Q(user__last_name__icontains=query)
-                    ).distinct()
+                Q(bio__icontains=query) |
+                Q(location__icontains=query) |
+                Q(phone__icontains=query) |
+                Q(user__username__icontains=query) |
+                Q(user__first_name__icontains=query) |
+                Q(user__last_name__icontains=query)
+            ).distinct()
         return queryset_list
 
 
@@ -85,18 +85,4 @@ def logout(request):
         'session_cleared': 'True',
         'logged_out': 'Successful',
     }
-    return JsonResponse(data)
-
-
-def who_am_i(request):
-    if request.user:
-        data = {
-            'username': request.user.username,
-            'full_name': request.user.first_name + " " + request.user.last_name,
-            'email_id': request.user.email,
-        }
-    else:
-        data = {
-            'message': 'Anonymous! Please Log In'
-        }    
     return JsonResponse(data)
