@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Blog } from './blog.model';
+import { DataService } from '../../services/data-service.service';
 
 @Component({
   selector: 'app-blog',
@@ -6,10 +8,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./blog.component.css']
 })
 export class BlogComponent implements OnInit {
+  selectedBlog: Blog;
 
-  constructor() { }
+  constructor(private dataService: DataService) {
+    console.log('The Constructor for the main Blog-Component ran');
+  }
 
   ngOnInit() {
+    this.dataService.blogSelected.subscribe(
+      (blog: Blog) => {
+        this.selectedBlog = blog;
+      }
+    );
   }
 
 }
