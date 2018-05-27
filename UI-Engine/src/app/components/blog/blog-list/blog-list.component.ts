@@ -8,7 +8,8 @@ import { Blog } from '../blog.model';
   styleUrls: ['./blog-list.component.scss']
 })
 export class BlogListComponent implements OnInit {
-  blogs: Blog[];
+  // public blogs: Blog[] = [new Blog('a', 'a', 1, new Date(), 2, 'aush', 'asd', 'asd', 'asd', 'bio', 'loc', '123123')];
+  public blogs: Blog[];
 
   constructor(private dataService: DataService) { }
 
@@ -16,7 +17,7 @@ export class BlogListComponent implements OnInit {
     this.dataService.getBlogs().subscribe(blogs => {
       this.blogs = blogs;
     });
-  // this.users = this.dataService.getUsers();
+
 
   }
 

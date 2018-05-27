@@ -34,7 +34,7 @@ export class User {
     }
 }
 
-class Profile {
+export class Profile {
     public bio: string;
     public location: string;
     public phone: string;
@@ -45,4 +45,6 @@ class Profile {
         this.phone = phone;
     }
 }
+
+
 

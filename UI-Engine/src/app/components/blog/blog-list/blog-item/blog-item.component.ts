@@ -18,7 +18,6 @@ export class BlogItemComponent implements OnInit {
   }
 
   onSelected() {
-    // alert(this.user.name);
     this.dataService.blogSelected.emit(this.blog);
   }
 

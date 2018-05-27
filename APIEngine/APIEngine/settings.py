@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     
     'rest_framework',
     'markdown_deux',
+    'corsheaders',
 
     'users',
     'blogs',
@@ -53,9 +54,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware'
 ]
 
 ROOT_URLCONF = 'APIEngine.urls'
+
+CORS_ORIGIN_ALLOW_ALL = True 
 
 TEMPLATES = [
     {

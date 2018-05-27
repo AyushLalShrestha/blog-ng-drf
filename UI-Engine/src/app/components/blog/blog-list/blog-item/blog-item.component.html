@@ -1,28 +1,11 @@
-<tr (click)="onSelected()" class="user-item-row" >
-  <td scope="row"><img
+<tr (click)="onSelected()" class="blog-item-row">
+  <!-- <td scope="row"><img
     [src]="user.imagePath"
     alt="{{ user.username }}"
     class="img-responsive"
-    style="max-height: 50px;"></td>
-  <td>{{user.name}}</td>
-  <td>{{user.username}} - {{user.email}}</td>
-  <td>{{user.phone}} </td>
-  <td>{{user.address.street}}, {{user.address.city}} - {{user.address.zipcode}} </td>
+    style="max-height: 50px;"></td> -->
+  <td>{{blog.title}}</td>
+  <td>{{blog.user.username}}</td>
+  <td>{{blog.read_time}} </td>
+  <td>{{blog.publish}} </td>
 </tr>
-
-<!-- <a
-  href="#"
-  class="list-group-item clearfix"
-  (click)="onSelected()">
-  <div class="pull-left">
-    <h4 class="list-group-item-heading">{{ user.name }}</h4>
-    <p class="list-group-item-text">{{ user.username }}</p>
-  </div>
-  <span class="pull-right">
-        <img
-          [src]="user.imagePath"
-          alt="{{ user.username }}"
-          class="img-responsive"
-          style="max-height: 50px;">
-      </span>
-</a> -->
