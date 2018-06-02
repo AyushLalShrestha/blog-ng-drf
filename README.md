@@ -1,2 +1,2 @@
 # blog-sell-buy
-A Blog app like medium where you blog and sell stuffs. Happy writing, Happy market!
+A Blog app like medium where you blog about your products to sell them! #underconstruction :)
