@@ -15,8 +15,8 @@
 
 
 <!-- <router-outlet></router-outlet> -->
-<nav class="navbar navbar-expand-lg purple-navbar navbar-light">
-    <a class="navbar-brand" href="#">Blog, Sell & Buy&copy;</a>
+<nav class="navbar navbar-expand-lg purple-navbar">
+    <a class="navbar-brand" href="#" data-toggle="modal" data-target=".about-us-modal">Blog, Sell & Buy&copy;</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -43,6 +43,35 @@
   <div>
     <div>
       <app-blog></app-blog>
+    </div>
+  </div>
+</div>
+
+
+
+<!--  ABOUT section-modal-->
+
+<!-- About us modal -->
+<div class="modal fade about-us-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6> About Blog, Sell & Buy </h6>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="detail" style="height: auto">
+          App details will be here !
+          <div>
+            <img  src="https://api.services.trvl.com/backgrounds/images/italy_1.jpg" height="450px" width="760px" >
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">got it</button>
+      </div>
     </div>
   </div>
 </div>
