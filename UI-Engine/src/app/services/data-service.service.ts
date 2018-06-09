@@ -15,18 +15,12 @@ export class DataService {
       .map(res => res.json());
   }
 
-  newBlog(data, csrftoken, sessionId) {
-    // return this.http.post('http://localhost:8000/blog/create', JSON.stringify(data), requestOptions)
-    //           .map((response: Response) => response.json())
+  newBlog(data) {
     return this.http.post('http://localhost:8000/blog/create/', JSON.stringify(data),
       {
         withCredentials: true,
         headers: new Headers({
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'Cookie': {
-            csrftoken: csrftoken,
-            sessionid: sessionId
-          }
+          'Content-Type': 'application/x-www-form-urlencoded'
         })
       }).map(res => res.json());
   }
@@ -39,3 +33,5 @@ export class DataService {
   //     );
   // }
 }
+
+

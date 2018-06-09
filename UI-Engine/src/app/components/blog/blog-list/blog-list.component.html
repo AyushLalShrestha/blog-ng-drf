@@ -1,19 +1,12 @@
 <div class="col-10">
   <table class="table table-striped table-hover">
-
     <tr>
-      <th scope="col">
-        <i class="far fa-newspaper"></i>
-        Blogs</th>
+      <th scope="col"> Blogs </th>
     </tr>
-
 
     <tr *ngFor="let blogEl of blogs">
       <app-blog-item [blog]="blogEl"></app-blog-item>
     </tr>
     <!-- <app-blog-item *ngFor="let blogEl of blogs" [blog]="blogEl"></app-blog-item> -->
-
   </table>
-
 </div>
-Ï

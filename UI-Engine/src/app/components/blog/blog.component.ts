@@ -12,9 +12,7 @@ export class BlogComponent implements OnInit {
   title: String;
   content: String;
 
-  constructor(private dataService: DataService) {
-    console.log('The Constructor for the main Blog-Component ran');
-  }
+  constructor(private dataService: DataService) { }
 
   ngOnInit() {
     this.dataService.blogSelected.subscribe(
@@ -29,16 +27,16 @@ export class BlogComponent implements OnInit {
   onSubmit(f) {
     let data = {
       title: f.value.title,
-      content: f.value.content
+      content: f.value.content,
+      publish: '2018-06-12'
     };
-    let csrftoken= 'ydDgaxBLCgfzz5rvjLzREaisvs1Q4vtGOknHWCFGXpQes2oz2CDZzdBtDMwVUugt';
-    let sessionId= 'dtqvkam8iss95n5wu1kcxiq96ddu91nq';
-    this.dataService.newBlog(data, csrftoken, sessionId).subscribe(
+    this.dataService.newBlog(data).subscribe(
       res => {
+        alert('successfully posted');
         console.log(res);
       },
       err => {
-        console.log('Error occured');
+        alert('Error occured');
       }
     );
   }

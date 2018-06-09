@@ -2,9 +2,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { HttpClientModule, HttpClientXsrfModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
 import { RouterModule, Routes } from '@angular/router';
 
 import { DataService } from './services/data-service.service';
+import { MyHttpXsrfInterceptor } from './services/auth.interceptor';
 
 import { AppComponent } from './app.component';
 
@@ -16,15 +19,15 @@ import { BlogDetailComponent } from './components/blog/blog-detail/blog-detail.c
 
 @NgModule({
   declarations: [
-    AppComponent,
-    BlogComponent,
-    BlogListComponent,
-    BlogItemComponent,
+    AppComponent, BlogComponent, BlogListComponent, BlogItemComponent,
     BlogDetailComponent
   ],
-  imports: [BrowserModule, FormsModule, HttpModule],
   // imports: [ BrowserModule, FormsModule, HttpModule, RouterModule.forRoot(appRoutes) ],
-  providers: [DataService],
+  imports: [ BrowserModule, FormsModule, HttpModule ],
+  providers: [ DataService,
+      { provide: HTTP_INTERCEPTORS, useClass: MyHttpXsrfInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

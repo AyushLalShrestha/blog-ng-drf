@@ -15,7 +15,6 @@ from models import Blog
 
 # from .pagination import PostLimitOffsetPagination, PostPageNumberPagination
 from .permissions import IsOwner
-
 from .serializers import ( BlogCreateSerializer, BlogListSerializer, BlogDetailSerializer )
 
 # Create Blog API
@@ -55,11 +54,3 @@ class BlogDetailAPIView(RetrieveAPIView):
     lookup_field = 'pk'
     permission_classes = [AllowAny]
     #lookup_url_kwarg = "abc"
-
-
-
-
-
-
-
-
