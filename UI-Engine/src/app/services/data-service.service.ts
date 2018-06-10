@@ -1,5 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Http, Headers } from '@angular/http';
+import { HttpClient, HttpHeaders} from '@angular/common/http';
 import 'rxjs/add/operator/map';
 
 import { Blog } from '../components/blog/blog.model';
@@ -8,21 +9,34 @@ import { Blog } from '../components/blog/blog.model';
 export class DataService {
   blogSelected = new EventEmitter<Blog>();
 
-  constructor(public http: Http) { }
+  constructor(public http: HttpClient) { }
 
   getBlogs() {
-    return this.http.get('http://localhost:8000/blog/list/?format=json')
-      .map(res => res.json());
+    // return this.http.get('http://localhost:8000/blog/list/?format=json')
+    //   .map(res => res.json());
+    // return this.http.get<employee[]>(ROOT_URL + '/Employees')
+    return this.http.get<Blog[]>('http://localhost:8000/blog/list/?format=json');
   }
 
+  // newBlog_old(data) {
+  //   return this.http.post('http://localhost:8000/blog/create/', JSON.stringify(data),
+  //     {
+  //       withCredentials: true,
+  //       headers: new Headers({
+  //         'Content-Type': 'application/x-www-form-urlencoded'
+  //       })
+  //     }).map(res => res.json());
+  // }
+
   newBlog(data) {
-    return this.http.post('http://localhost:8000/blog/create/', JSON.stringify(data),
-      {
+      // const headers = new HttpHeaders().set('content-type', 'application/json');
+      const headers = new HttpHeaders().set('content-type', 'application/x-www-form-urlencoded');
+        const body = {
+            title: data.title, content: data.content
+        };
+      return this.http.post('http://localhost:8000/blog/create/', body, {
         withCredentials: true,
-        headers: new Headers({
-          'Content-Type': 'application/x-www-form-urlencoded'
-        })
-      }).map(res => res.json());
+        headers });
   }
 
   /** POST: add a new hero to the database */

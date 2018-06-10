@@ -2,9 +2,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { HttpClientModule, HttpClientXsrfModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';  
+import {
+  HttpRequest, HttpHandler, HttpEvent,
+  HttpXsrfTokenExtractor, HttpInterceptor
+} from '@angular/common/http';
 
-import { RouterModule, Routes } from '@angular/router';
+// import { RouterModule, Routes } from '@angular/router';
 
 import { DataService } from './services/data-service.service';
 import { MyHttpXsrfInterceptor } from './services/auth.interceptor';
@@ -16,14 +20,13 @@ import { BlogListComponent } from './components/blog/blog-list/blog-list.compone
 import { BlogItemComponent } from './components/blog/blog-list/blog-item/blog-item.component';
 import { BlogDetailComponent } from './components/blog/blog-detail/blog-detail.component';
 
-
 @NgModule({
   declarations: [
     AppComponent, BlogComponent, BlogListComponent, BlogItemComponent,
     BlogDetailComponent
   ],
   // imports: [ BrowserModule, FormsModule, HttpModule, RouterModule.forRoot(appRoutes) ],
-  imports: [ BrowserModule, FormsModule, HttpModule ],
+  imports: [ BrowserModule, FormsModule, HttpClientModule ],
   providers: [ DataService,
       { provide: HTTP_INTERCEPTORS, useClass: MyHttpXsrfInterceptor, multi: true }
   ],

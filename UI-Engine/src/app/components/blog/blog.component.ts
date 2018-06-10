@@ -25,7 +25,7 @@ export class BlogComponent implements OnInit {
   }
 
   onSubmit(f) {
-    let data = {
+    const data = {
       title: f.value.title,
       content: f.value.content,
       publish: '2018-06-12'
@@ -33,12 +33,12 @@ export class BlogComponent implements OnInit {
     this.dataService.newBlog(data).subscribe(
       res => {
         alert('successfully posted');
-        console.log(res);
       },
       err => {
         alert('Error occured');
       }
     );
+
   }
 
 }
