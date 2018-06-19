@@ -15,7 +15,6 @@ export class BlogListComponent implements OnInit {
 
   ngOnInit() {
     this.dataService.getBlogs().subscribe(blogs => {
-      console.log(blogs);
       this.blogs = blogs;
     });
   }

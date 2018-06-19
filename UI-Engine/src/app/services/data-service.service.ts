@@ -12,9 +12,6 @@ export class DataService {
   constructor(public http: HttpClient) { }
 
   getBlogs() {
-    // return this.http.get('http://localhost:8000/blog/list/?format=json')
-    //   .map(res => res.json());
-    // return this.http.get<employee[]>(ROOT_URL + '/Employees')
     return this.http.get<Blog[]>('http://localhost:8000/blog/list/?format=json');
   }
 
