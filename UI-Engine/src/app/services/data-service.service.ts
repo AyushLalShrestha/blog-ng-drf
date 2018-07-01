@@ -14,17 +14,6 @@ export class DataService {
   getBlogs() {
     return this.http.get<Blog[]>('http://localhost:8000/blog/list/?format=json');
   }
-
-  // newBlog_old(data) {
-  //   return this.http.post('http://localhost:8000/blog/create/', JSON.stringify(data),
-  //     {
-  //       withCredentials: true,
-  //       headers: new Headers({
-  //         'Content-Type': 'application/x-www-form-urlencoded'
-  //       })
-  //     }).map(res => res.json());
-  // }
-
   newBlog(data) {
       // const headers = new HttpHeaders().set('content-type', 'application/json');
       const headers = new HttpHeaders().set('content-type', 'application/x-www-form-urlencoded');
@@ -35,14 +24,6 @@ export class DataService {
         withCredentials: true,
         headers });
   }
-
-  /** POST: add a new hero to the database */
-  // createblog (title, content): Observable<Hero> {
-  //   return this.http.post<Hero>(this.heroesUrl, hero, httpOptions)
-  //     .pipe(
-  //       catchError(this.handleError('addHero', hero))
-  //     );
-  // }
 }
 
 

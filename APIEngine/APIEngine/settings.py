@@ -92,8 +92,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'blogsellbuydb',
-        'USER': 'annapurna',
-        'PASSWORD': 'annapurna-wzkzlu-AP5',
+        # 'USER': 'annapurna',
+        # 'PASSWORD': 'annapurna-wzkzlu-AP5',
+        'USER': 'postgres',
+        'PASSWORD': 'p0stgres',
         'HOST': 'localhost',
         'PORT': '5432',
     }
