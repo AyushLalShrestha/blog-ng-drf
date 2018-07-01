@@ -20,6 +20,10 @@ import { BlogListComponent } from './components/blog/blog-list/blog-list.compone
 import { BlogItemComponent } from './components/blog/blog-list/blog-item/blog-item.component';
 import { BlogDetailComponent } from './components/blog/blog-detail/blog-detail.component';
 
+// const appRoutes: Routes = [
+//   { path:'/', component:UserComponent },
+//   { path:'about', component:AboutComponent }
+// ];
 @NgModule({
   declarations: [
     AppComponent, BlogComponent, BlogListComponent, BlogItemComponent,
@@ -33,4 +37,7 @@ import { BlogDetailComponent } from './components/blog/blog-detail/blog-detail.c
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+
+
 
