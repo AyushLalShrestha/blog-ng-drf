@@ -16,6 +16,7 @@ from models import Blog
 # from .pagination import PostLimitOffsetPagination, PostPageNumberPagination
 from .permissions import IsOwner
 from .serializers import ( BlogCreateSerializer, BlogListSerializer, BlogDetailSerializer )
+from .pagination import BlogPageNumberPagination
 
 # Create Blog API
 class BlogCreateAPIView(CreateAPIView):
@@ -32,8 +33,8 @@ class BlogListAPIView(ListAPIView):
     filter_backends= [ SearchFilter, OrderingFilter ]
     permission_classes = [ AllowAny ]
     search_fields = ['title', 'content', 'user__first_name']
-    # pagination_class = PostPageNumberPagination #PageNumberPagination
-
+    pagination_class = BlogPageNumberPagination #PageNumberPagination
+    
     def get_queryset(self, *args, **kwargs):
         #queryset_list = super(PostListAPIView, self).get_queryset(*args, **kwargs)
         queryset_list = Blog.objects.all() #filter(user=self.request.user)

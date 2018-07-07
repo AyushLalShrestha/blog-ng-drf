@@ -1,0 +1,18 @@
+<div class="col-10">
+  <table class="table table-striped table-hover">
+    <tr>
+      <th scope="col"> Username </th>
+      <th scope="col"> Full Name </th>
+      <th scope="col"> Location </th>
+    </tr>
+
+    <tr *ngFor="let userProfileEl of userProfiles">
+      <td scope="col"> {{userProfileEl.profilesUser.username}} </td>
+      <td scope="col"> {{userProfileEl.profilesUser.first_name}} {{userProfileEl.profilesUser.first_name}} </td>
+      <td scope="col"> {{userProfileEl.location}} </td>
+    </tr>
+      
+    
+    <!-- <app-blog-item *ngFor="let blogEl of blogs" [blog]="blogEl"></app-blog-item> -->
+  </table>
+</div>

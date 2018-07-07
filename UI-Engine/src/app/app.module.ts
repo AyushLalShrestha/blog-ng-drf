@@ -8,7 +8,7 @@ import {
   HttpXsrfTokenExtractor, HttpInterceptor
 } from '@angular/common/http';
 
-// import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 import { DataService } from './services/data-service.service';
 import { MyHttpXsrfInterceptor } from './services/auth.interceptor';
@@ -19,14 +19,21 @@ import { BlogComponent } from './components/blog/blog.component';
 import { BlogListComponent } from './components/blog/blog-list/blog-list.component';
 import { BlogItemComponent } from './components/blog/blog-list/blog-item/blog-item.component';
 import { BlogDetailComponent } from './components/blog/blog-detail/blog-detail.component';
+import { UserComponent } from './components/user/user.component';
+
+const appRoutes: Routes = [
+  {path: '', component: BlogComponent},
+  {path: 'user', component: UserComponent}
+];
 
 @NgModule({
   declarations: [
     AppComponent, BlogComponent, BlogListComponent, BlogItemComponent,
-    BlogDetailComponent
+    BlogDetailComponent,
+    UserComponent
   ],
   // imports: [ BrowserModule, FormsModule, HttpModule, RouterModule.forRoot(appRoutes) ],
-  imports: [ BrowserModule, FormsModule, HttpClientModule ],
+  imports: [ BrowserModule, FormsModule, HttpClientModule, RouterModule.forRoot(appRoutes) ],
   providers: [ DataService,
       { provide: HTTP_INTERCEPTORS, useClass: MyHttpXsrfInterceptor, multi: true }
   ],

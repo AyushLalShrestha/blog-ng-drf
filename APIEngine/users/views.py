@@ -26,7 +26,7 @@ from .serializers import (ProfileListSerializer)
 class ProfileListAPIView(ListAPIView):
     serializer_class = ProfileListSerializer
     filter_backends = [SearchFilter, OrderingFilter]
-    permission_classes = [IsAdminUser]
+    # permission_classes = [IsAdminUser]
     search_fields = ['bio', 'location', 'user__first_name',
                      'user__username', 'user__last_name']
     # pagination_class = PostPageNumberPagination #PageNumberPagination
