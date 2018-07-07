@@ -32,7 +32,6 @@ const appRoutes: Routes = [
     BlogDetailComponent,
     UserComponent
   ],
-  // imports: [ BrowserModule, FormsModule, HttpModule, RouterModule.forRoot(appRoutes) ],
   imports: [ BrowserModule, FormsModule, HttpClientModule, RouterModule.forRoot(appRoutes) ],
   providers: [ DataService,
       { provide: HTTP_INTERCEPTORS, useClass: MyHttpXsrfInterceptor, multi: true }
@@ -40,4 +39,7 @@ const appRoutes: Routes = [
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+
+
 
