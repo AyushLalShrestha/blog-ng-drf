@@ -21,8 +21,6 @@ from rest_framework.permissions import (AllowAny, IsAuthenticated, IsAdminUser,
 from .serializers import (ProfileListSerializer)
 
 # LISTS API
-
-
 class ProfileListAPIView(ListAPIView):
     serializer_class = ProfileListSerializer
     filter_backends = [SearchFilter, OrderingFilter]

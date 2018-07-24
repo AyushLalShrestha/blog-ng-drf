@@ -9,23 +9,23 @@ import { UserProfile } from '../components/user/user-profile.model';
 @Injectable()
 export class DataService {
   blogSelected = new EventEmitter<Blog>();
-
+  baseURL = 'http://localhost:8000';
   constructor(public http: HttpClient) { }
 
   getBlogs(pageNumber: Number = 1) {
-    return this.http.get<Blog[]>('http://localhost:8000/blog/list/?format=json');
+    return this.http.get<Blog[]>(this.baseURL + '/blog/list/?format=json&page=' + pageNumber);
   }
   newBlog(data) {
       const headers = new HttpHeaders().set('content-type', 'application/x-www-form-urlencoded');
         const body = {
             title: data.title, content: data.content
         };
-      return this.http.post('http://localhost:8000/blog/create/', body, {
+      return this.http.post(this.baseURL + '/blog/create/', body, {
         withCredentials: true,
         headers });
   }
   getUserProfiles() {
-    return this.http.get<UserProfile[]>('http://localhost:8000/user/profiles/?format=json');
+    return this.http.get<UserProfile[]>(this.baseURL + '/user/profiles/?format=json');
   }
 }
 

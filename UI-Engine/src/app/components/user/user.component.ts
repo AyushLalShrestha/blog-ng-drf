@@ -9,13 +9,20 @@ import { UserProfile } from './user-profile.model';
 })
 export class UserComponent implements OnInit {
   public userProfiles: UserProfile[];
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService) { 
+    this.userProfiles = [];
+  }
 
   ngOnInit() {
     this.dataService.getUserProfiles().subscribe(
       userProfiles => {
-        console.log(userProfiles);
-        this.userProfiles = userProfiles;
+        for (let i = 0; i < userProfiles.length; i++) {
+          const receivedUP = userProfiles[i];
+          const userProfile: UserProfile = new UserProfile(receivedUP['user']['username'], receivedUP['user']['email'],
+          receivedUP['user']['first_name'], receivedUP['user']['last_name'], receivedUP['bio'],
+          receivedUP['location'], receivedUP['phone']  );
+          this.userProfiles.push(userProfile);
+        }
       }
     );
   }
