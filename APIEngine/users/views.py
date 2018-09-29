@@ -10,6 +10,7 @@ from .models import Profile
 
 # For Rest framework API
 from rest_framework.filters import (SearchFilter, OrderingFilter, )
+from rest_framework.views import APIView
 from rest_framework.generics import (CreateAPIView, DestroyAPIView, ListAPIView, UpdateAPIView,
                                      RetrieveAPIView, RetrieveUpdateAPIView)
 
@@ -19,6 +20,7 @@ from rest_framework.permissions import (AllowAny, IsAuthenticated, IsAdminUser,
 # from .pagination import PostLimitOffsetPagination, PostPageNumberPagination
 # from .permissions import IsOwnerOrReadOnly
 from .serializers import (ProfileListSerializer)
+
 
 # LISTS API
 class ProfileListAPIView(ListAPIView):
@@ -55,8 +57,8 @@ def session_details(request):
 
 
 def login(request):
-    username = request.GET.get("username", "NONAME")
-    password = request.GET.get("password", "NOPWD")
+    username = request.GET.get("username") or request.POST.get("username")
+    password = request.GET.get("password") or request.POST.get("password")
     user = auth.authenticate(username=username, password=password)
     if user:
         auth.login(request, user)
@@ -74,6 +76,8 @@ def login(request):
     return JsonResponse(data)
 
 
+
+        
 def logout(request):
     if request.user:
         name = request.session.pop("username", "Nobody was logged in")
