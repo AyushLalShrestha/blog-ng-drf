@@ -18,6 +18,8 @@ from .permissions import IsOwner
 from .serializers import ( BlogCreateSerializer, BlogListSerializer, BlogDetailSerializer )
 from .pagination import BlogPageNumberPagination
 
+from users.jwtauthenticator import TokenAuthentication
+
 # Create Blog API
 class BlogCreateAPIView(CreateAPIView):
     queryset = Blog.objects.all()
@@ -29,9 +31,11 @@ class BlogCreateAPIView(CreateAPIView):
 
 # List Blog API
 class BlogListAPIView(ListAPIView):
+    authentication_classes = (TokenAuthentication, )
     serializer_class = BlogListSerializer
     filter_backends= [ SearchFilter, OrderingFilter ]
-    permission_classes = [ AllowAny ]
+    # permission_classes = [ AllowAny ]
+    permission_classes = [ IsAuthenticated ]
     search_fields = ['title', 'content', 'user__first_name']
     pagination_class = BlogPageNumberPagination #PageNumberPagination
     

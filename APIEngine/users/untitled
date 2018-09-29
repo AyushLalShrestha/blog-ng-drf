@@ -1,0 +1,1 @@
+curl -H "Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwidXNlcl9pZCI6MSwiZW1haWwiOiJtZXNzYWdlYXl1c2hAZ21haWwuY29tIiwiZXhwIjoxNTM4MjQxNTQxfQ.essGCJEflBGlHEgHv9YZd22mOG7BnE0q06ZklxybU2A" http://localhost:8000/blog/list/
