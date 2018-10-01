@@ -14,7 +14,6 @@ export class MyHttpXsrfInterceptor implements HttpInterceptor {
         // const headerName = 'X-XSRF-TOKEN';
         // const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwidXNlcl9pZCI6MSwiZW1haWwiOiJtZXNzYWdlYXl1c2hAZ21haWwuY29tIiwiZXhwIjoxNTM4MTk5NzAyfQ.wh8beErBaVdJaWh8AvfrzFFqODHQcTF8BXY--6fwdTA';
         if (token !== null && !req.headers.has(headerName)) {
-            console.log('Adding the token');
             const newHeader = { headers: req.headers.set(headerName, token)};
             req = req.clone(newHeader);
         }

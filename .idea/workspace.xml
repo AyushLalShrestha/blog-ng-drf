@@ -3,15 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="432c8f41-cf5b-4047-9e73-7e3faaa54ff8" name="Default" comment="">
       <change afterPath="$PROJECT_DIR$/../../PythonBasics/exception_handling.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/devtests/request_tests.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../PythonBasics/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../PythonBasics/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../PythonBasics/timezoning/testing_time_conversions.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../PythonBasics/timezoning/testing_time_conversions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vscode/settings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APIEngine/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/APIEngine/users/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI-Engine/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/UI-Engine/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI-Engine/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/UI-Engine/src/app/app.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI-Engine/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/UI-Engine/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APIEngine/blogs/permissions.py" beforeDir="false" afterPath="$PROJECT_DIR$/APIEngine/blogs/permissions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APIEngine/blogs/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/APIEngine/blogs/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APIEngine/users/jwtauthenticator.py" beforeDir="false" afterPath="$PROJECT_DIR$/APIEngine/users/jwtauthenticator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APIEngine/users/untitled" beforeDir="false" afterPath="$PROJECT_DIR$/APIEngine/users/untitled" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -22,20 +20,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="request_tests.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/devtests/request_tests.py">
+      <file leaf-file-name="permissions.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/APIEngine/blogs/permissions.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="468">
-              <caret line="26" column="21" selection-start-line="26" selection-start-column="21" selection-end-line="26" selection-end-column="21" />
+            <state relative-caret-position="288">
+              <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="exception_handling.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/../../PythonBasics/exception_handling.py">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/APIEngine/blogs/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="15" column="15" lean-forward="true" selection-start-line="15" selection-start-column="15" selection-end-line="15" selection-end-column="15" />
+            <state relative-caret-position="306">
+              <caret line="36" column="33" lean-forward="true" selection-start-line="36" selection-start-column="33" selection-end-line="36" selection-end-column="33" />
             </state>
           </provider>
         </entry>
@@ -50,13 +48,15 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../PythonBasics" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/devtests/request_tests.py" />
         <option value="$PROJECT_DIR$/../../PythonBasics/exception_handling.py" />
+        <option value="$PROJECT_DIR$/APIEngine/blogs/permissions.py" />
+        <option value="$PROJECT_DIR$/APIEngine/blogs/views.py" />
       </list>
     </option>
   </component>
@@ -84,7 +84,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -95,16 +94,18 @@
             <path>
               <item name="src" type="b2602c69:ProjectViewProjectNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="devtests" type="462c0819:PsiDirectoryNode" />
+              <item name="APIEngine" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="src" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PythonBasics" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="devtests" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -143,24 +144,24 @@
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.24232082" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="right" id="SciView" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.32992035" />
       <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -187,6 +188,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../../PythonBasics/exception_handling.py">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="15" column="15" lean-forward="true" selection-start-line="15" selection-start-column="15" selection-end-line="15" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/devtests/request_tests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="26" column="21" selection-start-line="26" selection-start-column="21" selection-end-line="26" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../PythonBasics/exception_handling.py">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="54">
           <caret line="3" column="28" selection-start-line="3" selection-start-column="28" selection-end-line="3" selection-end-column="28" />
         </state>
@@ -202,6 +217,13 @@
     <entry file="file://$PROJECT_DIR$/../../PythonBasics/running_commands/paramiko_commands.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/../../PythonBasics/exception_handling.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/devtests/request_tests.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="468">
@@ -209,10 +231,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../PythonBasics/exception_handling.py">
+    <entry file="file://$PROJECT_DIR$/APIEngine/blogs/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="15" column="15" lean-forward="true" selection-start-line="15" selection-start-column="15" selection-end-line="15" selection-end-column="15" />
+        <state relative-caret-position="306">
+          <caret line="36" column="33" lean-forward="true" selection-start-line="36" selection-start-column="33" selection-end-line="36" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/APIEngine/blogs/permissions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
         </state>
       </provider>
     </entry>

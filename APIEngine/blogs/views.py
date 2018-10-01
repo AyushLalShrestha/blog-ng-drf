@@ -20,6 +20,7 @@ from .pagination import BlogPageNumberPagination
 
 from users.jwtauthenticator import TokenAuthentication
 
+
 # Create Blog API
 class BlogCreateAPIView(CreateAPIView):
     queryset = Blog.objects.all()
@@ -29,13 +30,14 @@ class BlogCreateAPIView(CreateAPIView):
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
+
 # List Blog API
 class BlogListAPIView(ListAPIView):
     authentication_classes = (TokenAuthentication, )
+    # permission_classes = [ AllowAny ]
+    permission_classes = (IsOwner, )
     serializer_class = BlogListSerializer
     filter_backends= [ SearchFilter, OrderingFilter ]
-    # permission_classes = [ AllowAny ]
-    permission_classes = [ IsAuthenticated ]
     search_fields = ['title', 'content', 'user__first_name']
     pagination_class = BlogPageNumberPagination #PageNumberPagination
     
@@ -51,6 +53,7 @@ class BlogListAPIView(ListAPIView):
                     Q(user__last_name__icontains=query)
                     ).distinct()
         return queryset_list
+
 
 # Detail Blog API
 class BlogDetailAPIView(RetrieveAPIView):

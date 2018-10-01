@@ -20,17 +20,20 @@ import { BlogListComponent } from './components/blog/blog-list/blog-list.compone
 import { BlogItemComponent } from './components/blog/blog-list/blog-item/blog-item.component';
 import { BlogDetailComponent } from './components/blog/blog-detail/blog-detail.component';
 import { UserComponent } from './components/user/user.component';
+import { UsersessionComponent } from './components/usersession/usersession.component';
 
 const appRoutes: Routes = [
   {path: '', component: BlogComponent},
-  {path: 'user', component: UserComponent}
+  {path: 'user', component: UserComponent},
+  {path: 'session', component: UsersessionComponent},
 ];
 
 @NgModule({
   declarations: [
     AppComponent, BlogComponent, BlogListComponent, BlogItemComponent,
     BlogDetailComponent,
-    UserComponent
+    UserComponent,
+    UsersessionComponent
   ],
   imports: [ BrowserModule, FormsModule, HttpClientModule, RouterModule.forRoot(appRoutes) ],
   providers: [ DataService,

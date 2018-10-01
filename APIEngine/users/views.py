@@ -61,6 +61,7 @@ def login(request):
     password = request.GET.get("password") or request.POST.get("password")
     user = auth.authenticate(username=username, password=password)
     if user:
+        print "Successful login from: %s" % username
         auth.login(request, user)
         request.session['username'] = username
         data = {

@@ -27,6 +27,14 @@ export class DataService {
   getUserProfiles() {
     return this.http.get<UserProfile[]>(this.baseURL + '/user/profiles/?format=json');
   }
+  login(data) {
+    const headers = new HttpHeaders().set('content-type', 'application/x-www-form-urlencoded');
+    const formData = {'username': data.username, 'password': data.password};
+    return this.http.get(this.baseURL + '/user/login/', {
+      params: {'username': data.username, 'password': data.password},
+      withCredentials: true,
+      headers });
+}
 }
 
 
