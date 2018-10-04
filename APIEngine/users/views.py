@@ -80,8 +80,9 @@ def login(request):
 
         
 def logout(request):
+    name = "Nobody was logged in"
     if request.user:
-        name = request.session.pop("username", "Nobody was logged in")
+        name = request.session.pop("username")
         auth.logout(request)
     data = {
         'logged_out_user': name,

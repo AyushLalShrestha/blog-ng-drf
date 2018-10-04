@@ -4,7 +4,6 @@ from django.contrib import admin
 from .views import who_am_i
 from rest_framework_jwt.views import obtain_jwt_token, verify_jwt_token
 
-
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^user/', include('users.urls')),

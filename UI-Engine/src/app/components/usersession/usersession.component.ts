@@ -21,7 +21,6 @@ export class UsersessionComponent implements OnInit {
     this.dataService.login(data).subscribe(
       res => {
         console.log(res);
-        alert('successful');
       },
       err => {
         console.log(err);

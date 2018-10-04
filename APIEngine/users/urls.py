@@ -10,6 +10,8 @@ urlpatterns = [
     url(r'^logout/', logout, name='logout_view'),
     url(r'^profiles/$', ProfileListAPIView.as_view(), name='profile_list'),
     # url(r'^article/(\d+)/', 'viewArticle', name = 'article'),
+    
+    # These were for the jwt-token test
     url(r'^api-token-refresh', refresh_jwt_token),
     url(r'^api-token-verify', verify_jwt_token),
     # url(r'^api-register-user', views.CreateUserView.as_view()),

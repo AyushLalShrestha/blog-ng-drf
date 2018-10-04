@@ -16,16 +16,18 @@ export class DataService {
     return this.http.get<Blog[]>(this.baseURL + '/blog/list/?format=json&page=' + pageNumber);
   }
   newBlog(data) {
-      const headers = new HttpHeaders().set('content-type', 'application/x-www-form-urlencoded');
-        const body = {
-            title: data.title, content: data.content
-        };
+      // const headers = new HttpHeaders().set('content-type', 'application/x-www-form-urlencoded');
+      const headers = new HttpHeaders().set('X-CSRFToken', document.cookie.split('=')[1]);
+      const today = new Date().toISOString().slice(0, 10);
+      const body = {
+          title: data.title, content: data.content, publish: today
+      };
       return this.http.post(this.baseURL + '/blog/create/', body, {
         withCredentials: true,
         headers });
   }
   getUserProfiles() {
-    return this.http.get<UserProfile[]>(this.baseURL + '/user/profiles/?format=json');
+    return this.http.get<UserProfile[]>(this.baseURL + '/user/profiles/?format=json', {withCredentials: true});
   }
   login(data) {
     const headers = new HttpHeaders().set('content-type', 'application/x-www-form-urlencoded');

@@ -1,5 +1,5 @@
 
-<form novalidate #f="ngForm" (ngSubmit)="onLogin(f)">
+<form class="col-sm-5" novalidate #f="ngForm" (ngSubmit)="onLogin(f)">
         <div class="form-group">
           <label>Username</label>
           <input type="text" class="form-control" name="username" ngModel  autocomplete="off" minlength="2" required #username="ngModel">
