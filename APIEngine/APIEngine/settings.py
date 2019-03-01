@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = '/src' #os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # APPEND_SLASH = False
 # Quick-start development settings - unsuitable for production
@@ -63,7 +63,7 @@ ROOT_URLCONF = 'APIEngine.urls'
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_WHITELIST = (
-    'http://localhost:4200' # Here was the problem indeed and it has to be http://localhost:3000, not http://localhost:3000/
+    'http://uiengine:4200' # Here was the problem indeed and it has to be http://localhost:3000, not http://localhost:3000/
 )
 
 REST_FRAMEWORK = {
@@ -109,11 +109,11 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'blogsellbuydb',
-        # 'USER': 'annapurna',
-        # 'PASSWORD': 'annapurna-wzkzlu-AP5',
-        'USER': 'postgres',
-        'PASSWORD': 'p0stgres',
-        'HOST': 'localhost',
+        'USER': 'annapurna',
+        'PASSWORD': 'annapurna-wzkzlu-AP5',
+        # 'USER': 'postgres',
+        # 'PASSWORD': 'p0stgres',
+        'HOST': 'postgres',
         'PORT': '5432',
     }
 }
