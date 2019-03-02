@@ -5,11 +5,11 @@ class IsOwner(BasePermission):
     message = 'You must be the owner of this object.'
 
     # def has_permission(self, request, view):
-    #     print "Is Owner permission check"
+    #     print("Is Owner permission check")
     #     return True
 
     def has_object_permission(self, request, view, obj):
-        print "Checking object permissions"
+        print("Checking object permissions")
         return True
         # if request.method in permissions.SAFE_METHODS:
         #     return True

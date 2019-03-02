@@ -24,4 +24,4 @@ cookies = {
 }
 
 response_2 = requests.get('http://localhost:8000/whoami/', headers=headers, cookies=cookies)
-print response_2.text
+print(response_2.text)

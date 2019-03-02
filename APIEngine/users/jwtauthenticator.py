@@ -1,4 +1,9 @@
 
+import json
+from users.models import User
+from rest_framework.authentication import get_authorization_header, BaseAuthentication
+from django.http import HttpResponse
+from rest_framework import status, exceptions
 from django.contrib import auth
 from django.http import JsonResponse, HttpResponse
 import jwt
@@ -16,40 +21,35 @@ class UserLoginViewJwt(APIView):
     def get(self, request, *args, **kwargs):
         username = request.GET.get('username')
         password = request.GET.get('password')
-        
+
         user = auth.authenticate(username=username, password=password)
         if user:
             payload = jwt_payload_handler(user)
             token = {
                 'token': jwt.encode(payload, SECRET_KEY),
                 'status': 'success'
-                }            
+            }
             return JsonResponse(token)
         else:
             return JsonResponse({
-              'error': 'Invalid credentials',
-              'status': 'failed'
-              })
+                'error': 'Invalid credentials',
+                'status': 'failed'
+            })
 
 
 def GetMyUsername(request):
-	token = request.GET.get('token')
-	data = {'token': token}
-	try:
-		valid_data = VerifyJSONWebTokenSerializer().validate(data)
-		if valid_data:
-			user = valid_data['user']
-			return JsonResponse({"username": user.username})
-	except Exception as ex:
-		return JsonResponse({"error": "Invalid Token"})
+    token = request.GET.get('token')
+    data = {'token': token}
+    try:
+        valid_data = VerifyJSONWebTokenSerializer().validate(data)
+        if valid_data:
+            user = valid_data['user']
+            return JsonResponse({"username": user.username})
+    except Exception as ex:
+        return JsonResponse({"error": "Invalid Token"})
 
 
-# - - - - -  - - - - - JWT Authentication Class - - - - -  - - - - -  - - - - - 
-from rest_framework import status, exceptions
-from django.http import HttpResponse
-from rest_framework.authentication import get_authorization_header, BaseAuthentication
-from users.models import User
-import json
+# - - - - -  - - - - - JWT Authentication Class - - - - -  - - - - -  - - - - -
 
 
 class TokenAuthentication(BaseAuthentication):
@@ -60,11 +60,10 @@ class TokenAuthentication(BaseAuthentication):
         return User
 
     def authenticate(self, request):
-    	auth = get_authorization_header(request).split()
-    	print "Authenticating JWT Token"
-    	# print auth
-        if not auth or auth[0].lower() != b'token':
-            return None
+        auth = get_authorization_header(request).split()
+        print("Authenticating JWT Token")
+        # if not auth or auth[0].lower() != 'token':
+        #     return None
 
         if len(auth) == 1:
             msg = 'Invalid token header. No credentials provided.'
@@ -75,7 +74,7 @@ class TokenAuthentication(BaseAuthentication):
 
         try:
             token = auth[1]
-            if token=="null":
+            if token == "null":
                 msg = 'Null token not allowed'
                 raise exceptions.AuthenticationFailed(msg)
         except UnicodeError:
@@ -85,15 +84,15 @@ class TokenAuthentication(BaseAuthentication):
         return self.authenticate_credentials(token)
 
     def authenticate_credentials(self, token):
-    	payload = jwt.decode(token, SECRET_KEY)
-    	"""
+        payload = jwt.decode(token, SECRET_KEY)
+        """
     	# Alternatively
 		# data = {'token': token}
      	# valid_data = VerifyJSONWebTokenSerializer().validate(data)
      	# user = valid_data['user']
     	"""
-    	model = self.get_model()
-    	email = payload['email']
+        model = self.get_model()
+        email = payload['email']
         userid = payload['user_id']
         try:
             user = User.objects.get(
@@ -111,4 +110,4 @@ class TokenAuthentication(BaseAuthentication):
         return (user, token)
 
     def authenticate_header(self, request):
-        return 'Token'    
+        return 'Token'

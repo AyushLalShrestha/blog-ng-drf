@@ -11,7 +11,7 @@ from rest_framework.generics import ( CreateAPIView, DestroyAPIView, ListAPIView
 from rest_framework.permissions import ( AllowAny, IsAuthenticated, IsAdminUser, 
     IsAuthenticatedOrReadOnly, )
 
-from models import Blog
+from .models import Blog
 
 # from .pagination import PostLimitOffsetPagination, PostPageNumberPagination
 from .permissions import IsOwner

@@ -9,7 +9,7 @@ from django.utils.safestring import mark_safe
 from django.utils.text import slugify
 from markdown_deux import markdown
 
-from utils import get_read_time
+from .utils import get_read_time
 
 def upload_location(instance, filename):
     #filebase, extension = filename.split(".")
@@ -31,7 +31,7 @@ class BlogManager(models.Manager):
 
 
 class Blog(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1, on_delete=None)
     title = models.CharField(max_length=120)
     slug = models.SlugField(unique=True)
     image = models.ImageField(upload_to=upload_location,
