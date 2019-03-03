@@ -10,5 +10,8 @@ docker run --platform=linux -it --rm --name postgres -v postgres_data:/var/lib/p
 
 docker run --platform=linux -it --rm --name apiengine -d -v "$(pwd):/src" -w /src --net bsb-net -p 5050:8000 apiengine
 
+docker run --platform=linux -it --rm --name uiengine -d -v "$(pwd):/ngapp" -w /ngapp --net bsb-net -p 5051:4200 uiengine
+
 docker exec -it apiengine /bin/bash
 docker exec -it postgres /bin/bash
+docker exec -it uiengine sh

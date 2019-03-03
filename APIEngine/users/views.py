@@ -1,5 +1,6 @@
 
 from __future__ import unicode_literals
+import logging as log
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -47,7 +48,7 @@ class ProfileListAPIView(ListAPIView):
 
 
 def session_details(request):
-    print(request.user)
+    log.warn(request.user)
     data = {
         'logged_in_user': request.session.get('username', 'Nobody'),
         'location': 'Nepal',
