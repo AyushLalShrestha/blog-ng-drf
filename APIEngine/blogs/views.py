@@ -29,8 +29,7 @@ from django.views.decorators.csrf import csrf_exempt
 class BlogCreateAPIView(CreateAPIView):
     queryset = Blog.objects.all()
     serializer_class = BlogCreateSerializer
-    # permission_classes = [ IsAuthenticated ]
-    permission_classes = [ AllowAny ]
+    permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
@@ -39,8 +38,7 @@ class BlogCreateAPIView(CreateAPIView):
 # List Blog API
 class BlogListAPIView(ListAPIView):
     # authentication_classes = (TokenAuthentication)
-    # permission_classes = [ AllowAny ]
-    permission_classes = (IsOwner, )
+    permission_classes = [ AllowAny ]
     serializer_class = BlogListSerializer
     filter_backends= [ SearchFilter, OrderingFilter ]
     search_fields = ['title', 'content', 'user__first_name']
@@ -64,9 +62,21 @@ class BlogListAPIView(ListAPIView):
 class BlogDetailAPIView(RetrieveAPIView):
     queryset = Blog.objects.all()
     serializer_class = BlogDetailSerializer
-    lookup_field = 'pk'
-    permission_classes = [AllowAny]
+    # lookup_field = 'pk'
+    permission_classes = [AllowAny] # IsAuthenticated
     #lookup_url_kwarg = "abc"
+
+
+# Update Blog API
+@method_decorator(csrf_exempt, name='dispatch')
+class BlogUpdateAPIView(RetrieveUpdateAPIView):
+    queryset = Blog.objects.all()
+    serializer_class = BlogCreateSerializer
+    permission_classes = [IsAuthenticated, IsOwner]
+
+    def perform_update(self, serializer):
+        serializer.save(user=self.request.user)
+
 
 """
 class UserList(generics.ListCreateAPIView):

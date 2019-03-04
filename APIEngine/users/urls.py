@@ -6,7 +6,7 @@ from django.conf.urls import url, include
 from rest_framework_jwt.views import (obtain_jwt_token, verify_jwt_token, refresh_jwt_token)
 
 import logging as log
-log.warning("This is a webserver log")
+
 urlpatterns = [
     url(r'^sessiondetails/', session_details, name='session_detail'),
     url(r'^login/', login, name='login_view'),

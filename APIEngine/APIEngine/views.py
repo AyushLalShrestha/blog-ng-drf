@@ -1,7 +1,10 @@
+import logging as log
 from django.http import JsonResponse
+
 
 def who_am_i(request):
     if request.user:
+        log.warn(request.user)
         data = {
             'username': request.user.username,
             'full_name': request.user.first_name + " " + request.user.last_name,

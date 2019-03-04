@@ -1,3 +1,5 @@
+
+import logging as log
 from rest_framework.permissions import BasePermission, SAFE_METHODS
 
 
@@ -10,10 +12,11 @@ class IsOwner(BasePermission):
 
     def has_object_permission(self, request, view, obj):
         print("Checking object permissions")
-        return True
         # if request.method in permissions.SAFE_METHODS:
         #     return True
-        # return obj.owner == request.user
+        log.warn(obj)
+        log.warn("obj.owner: {} and request.user: {}".format(obj.user, request.user))
+        return obj.user == request.user
 
 
 # class IsOwnerOrReadOnly(BasePermission):
