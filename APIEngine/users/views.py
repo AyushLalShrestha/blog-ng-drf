@@ -49,7 +49,7 @@ class ProfileListAPIView(ListAPIView):
 
 
 def session_details(request):
-    log.warn(request.user)
+    log.warn("session details : logged in user= {}".format(request.user))
     data = {
         'logged_in_user': request.session.get('username', 'Nobody'),
         'location': 'Nepal',
@@ -88,7 +88,6 @@ def logout(request):
         auth.logout(request)
     data = {
         'logged_out_user': name,
-        'session_cleared': 'True',
         'logged_out': 'Successful',
     }
     return JsonResponse(data)
