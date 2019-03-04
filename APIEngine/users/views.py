@@ -1,5 +1,6 @@
 
 from __future__ import unicode_literals
+
 import logging as log
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required

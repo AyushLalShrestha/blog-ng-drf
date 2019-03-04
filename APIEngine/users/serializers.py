@@ -21,7 +21,7 @@ class UserDetailSerializer(ModelSerializer):
 
 class ProfileListSerializer(ModelSerializer):
     user = UserDetailSerializer(read_only=True)
-
+    
     class Meta:
         model = Profile
         fields = [
