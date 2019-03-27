@@ -12,6 +12,9 @@
           <div *ngIf="password.errors?.required && password.touched" class="alert alert-danger">Empty password!</div>
           
         </div>
-        <input type="submit" class="btn btn-success float-lg-right" value="login">
+        <input type="submit" class="btn" value="login">
 </form>
+
+<p>
+<button class="btn waves-effect waves-light red" (click)="onLogout()">Logout</button>
 

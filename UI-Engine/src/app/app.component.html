@@ -1,28 +1,18 @@
-<nav class="navbar navbar-expand-lg purple-navbar">
-    <a class="navbar-brand" href="#" data-toggle="modal" data-target=".about-us-modal">Blog, Sell & Buy&copy;</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/">Blogs</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/user">Users</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#">Disabled</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/session">Login</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+<nav class="nav-wrapper">
+  <a class="brand-logo" href="#" data-toggle="modal" data-target=".about-us-modal">Blog, Sell & Buy&copy;</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <ul class="right hide-on-med-and-down">
+    <li><a href="#">Home</a></li>
+    <li><a routerLink="/">Blogs</a></li>
+    <li><a routerLink="/user">Users</a></li>
+    <li><a routerLink="/session">Session</a></li>
+  </ul>
+
+</nav>
 
 
 <div class="container">
@@ -36,7 +26,8 @@
 
 
 <!--  ABOUT section-modal-->
-<div class="modal fade about-us-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div class="modal fade about-us-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog modal-md">
     <div class="modal-content">
       <div class="modal-header">
@@ -49,7 +40,7 @@
         <div class="detail" style="height: auto">
           App details will be here !
           <div>
-            <img  src="https://api.services.trvl.com/backgrounds/images/italy_1.jpg" height="450px" width="460px" >
+            <img src="https://api.services.trvl.com/backgrounds/images/italy_1.jpg" height="450px" width="460px">
           </div>
         </div>
       </div>

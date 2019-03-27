@@ -13,7 +13,7 @@ export class BlogDetailComponent implements OnInit {
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
-    // alert(this.user.address);
+    
   }
 
 }

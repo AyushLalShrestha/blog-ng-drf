@@ -8,7 +8,8 @@
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".blog-detail-modal">Details</button>
 
 <!-- Large modal -->
-<div class="modal fade blog-detail-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div class="modal blog-detail-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -37,46 +38,49 @@
 
 
 <!-- Trigger Modal  -->
-<button type="button" class="btn btn-success" data-toggle="modal" data-target="#new-blog-modal">
-  Write a Blog
-</button>
+<a class="btn-floating btn-large waves-effect waves-light red" data-toggle="modal" data-target="#new-blog-modal"><i
+    class="material-icons">add</i></a>
+
+
+    <!-- Modal Trigger -->
+  <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
+
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>Modal Header</h4>
+      <p>A bunch of text</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+  </div>
 
 <!-- Modal -->
-<div class="modal fade" id="new-blog-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">New Blog</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
+<div class="modal" id="new-blog-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
 
-      <div class="modal-body">
-        <!-- Form starts here -->
-        <form novalidate #f="ngForm" (ngSubmit)="onSubmit(f)">
-          <div class="form-group">
-            <label>Title</label>
-            <input type="text" class="form-control" name="title" ngModel  autocomplete="off" minlength="2" required #title="ngModel">
-            <div *ngIf="title.errors?.required && title.touched" class="alert alert-danger">Empty title!</div>
-            <div *ngIf="title.errors?.minlength && title.touched" class="alert alert-danger">Title should be at least 10 characters</div> 
-          </div>
-          <div class="form-group">
-            <label>Content</label>
-            <input class="form-control" name="content" ngModel autocomplete="off" minlength="5" required #content="ngModel">
-            <div *ngIf="title.errors?.required && title.touched" class="alert alert-danger">There should be some content</div>
-            <div *ngIf="title.errors?.minlength && title.touched" class="alert alert-danger">Content should be at least 50 characters</div>   
-          </div>
-          <input type="submit" class="btn btn-success float-lg-right" value="Submit">
-        </form>
-        <!-- Form ends here -->
-      </div>
-
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-      </div>
-
-    </div>
+  <div class="modal-content">
+      <!-- Form starts here -->
+      <form  #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <div class="input-field col s6">
+          <input type="text" class="validate" name="title" ngModel autocomplete="off" minlength="2" required #title="ngModel">
+          <label for="title">Title</label>
+          <!-- <div *ngIf="title.errors?.required && title.touched" class="alert alert-danger">Empty title!</div>
+          <div *ngIf="title.errors?.minlength && title.touched" class="alert alert-danger">Title should be at least 10 characters</div> -->
+        </div>
+        <div class="input-field col s6">
+          <input id="content" type="text" class="validate" name="content" ngModel autocomplete="off" minlength="5" required #content="ngModel">
+          <label for="content">Content</label>
+          <!-- <div *ngIf="title.errors?.required && title.touched" class="alert alert-danger">There should be some content</div>
+          <div *ngIf="title.errors?.minlength && title.touched" class="alert alert-danger">Content should be at least 50 characters</div> -->
+        </div>
+        <input type="submit" class="btn waves-effect waves-green btn-flat" value="Submit">
+      </form>
+      <!-- Form ends here -->
+  </div>
+  <div class="modal-footer">
+    <a data-dismiss="modal" href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
   </div>
 </div>
 

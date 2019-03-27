@@ -20,13 +20,17 @@ export class UsersessionComponent implements OnInit {
     };
     this.dataService.login(data).subscribe(
       res => {
-        console.log(res);
+        localStorage.setItem('jwt_token', res['token']);
       },
       err => {
-        console.log(err);
+        alert("error logging in");
       }
     );
 
+  }
+  onLogout(){
+    alert("logging out");
+    localStorage.removeItem("jwt_token");
   }
 
 }

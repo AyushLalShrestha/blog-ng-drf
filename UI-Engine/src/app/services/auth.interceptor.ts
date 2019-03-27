@@ -1,23 +1,28 @@
 import { Injectable } from '@angular/core';
-import { HttpInterceptor, HttpHandler, HttpRequest, HttpEvent, HttpResponse, HttpXsrfTokenExtractor } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/do';
+import { HttpInterceptor, HttpHandler, HttpRequest, HttpEvent, HttpHeaders, HttpXsrfTokenExtractor } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
 import { CookieXSRFStrategy } from '@angular/http';
 
 @Injectable()
 export class MyHttpXsrfInterceptor implements HttpInterceptor {
 
-    constructor(private tokenExtractor: HttpXsrfTokenExtractor) { }
+    // constructor(private tokenExtractor: HttpXsrfTokenExtractor) { }
+    constructor() { }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        const headerName = 'X-XSRF-TOKEN';
-        const token = this.tokenExtractor.getToken();
+        const idToken = localStorage.getItem("jwt_token");
         
-        if (token !== null && !req.headers.has(headerName)) {
-            const newHeader = { headers: req.headers.set(headerName, token)};
-            req = req.clone(newHeader);
+        if (idToken) {
+            // const headers = new HttpHeaders().set('X-CSRFToken', '8ipjC3UCLyakUNp1t9C3ZeiQVtzBH2NerMY0ayMnb6qxCpY9gvXOrP3JrouFThWp');
+            const newHeader = {headers: req.headers.set("Authorization", "Bearer " + idToken)}
+            const cloned = req.clone(newHeader);
+
+            return next.handle(cloned);
         }
-        return next.handle(req);
+        else {
+            return next.handle(req);
+        }
     }
 }
 

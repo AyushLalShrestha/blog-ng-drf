@@ -1,18 +1,16 @@
+
+import 'materialize-css';
+import { MaterializeModule } from 'angular2-materialize';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 // import { HttpModule } from '@angular/http';
-import { HttpClientModule, HTTP_INTERCEPTORS, HttpClientXsrfModule } from '@angular/common/http';
-// import {
-//   HttpRequest, HttpHandler, HttpEvent,
-//   HttpXsrfTokenExtractor, HttpInterceptor
-// } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { RouterModule, Routes } from '@angular/router';
 
 import { DataService } from './services/data-service.service';
 import { MyHttpXsrfInterceptor } from './services/auth.interceptor';
-
 import { AppComponent } from './app.component';
 
 import { BlogComponent } from './components/blog/blog.component';
@@ -35,7 +33,13 @@ const appRoutes: Routes = [
     UserComponent,
     UsersessionComponent
   ],
-  imports: [ BrowserModule, FormsModule, HttpClientModule, RouterModule.forRoot(appRoutes) ],
+  imports: [ 
+    BrowserModule,
+    FormsModule, 
+    HttpClientModule, 
+    RouterModule.forRoot(appRoutes)
+    // MaterializeModule
+  ],
   providers: [ DataService,
       { provide: HTTP_INTERCEPTORS, useClass: MyHttpXsrfInterceptor, multi: true }
   ],
