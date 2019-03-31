@@ -1,4 +1,3 @@
-
 import 'materialize-css';
 import { MaterializeModule } from 'angular2-materialize';
 import { BrowserModule } from '@angular/platform-browser';
@@ -37,8 +36,8 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule, 
     HttpClientModule, 
-    RouterModule.forRoot(appRoutes)
-    // MaterializeModule
+    RouterModule.forRoot(appRoutes),
+    MaterializeModule
   ],
   providers: [ DataService,
       { provide: HTTP_INTERCEPTORS, useClass: MyHttpXsrfInterceptor, multi: true }

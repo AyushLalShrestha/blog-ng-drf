@@ -9,10 +9,15 @@ import { UserProfile } from '../components/user/user-profile.model';
 export class DataService {
   blogSelected = new EventEmitter<Blog>();
   baseURL = 'http://localhost:5050';
-  constructor(public http: HttpClient) { }
+
+  constructor(public http: HttpClient) { 
+  }
 
   getBlogs(pageNumber: Number = 1) {
     return this.http.get<Blog[]>(this.baseURL + '/blog/list/?page=' + pageNumber);
+  }
+  getBlogDetail(pk: Number = 1){
+    return this.http.get<Blog>(this.baseURL + '/blog/' + pk + '/');
   }
   newBlog(data) {
       const today = new Date().toISOString().slice(0, 10);
@@ -31,9 +36,12 @@ export class DataService {
     const formData = new FormData();
     formData.append('username', data.username);
     formData.append('password', data.password);
-    
     return this.http.post(this.baseURL + '/user/api-token-login/', formData);
   }
+  getSessionDetails(){
+    return this.http.get<any>(this.baseURL + '/user/sessionDetails/', {withCredentials: true});
+  }
+
   
 }
 

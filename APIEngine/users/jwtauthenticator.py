@@ -18,15 +18,15 @@ jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
 
 
 class UserLoginViewJwt(APIView):
-    def get(self, request, *args, **kwargs):
-        username = request.GET.get('username')
-        password = request.GET.get('password')
-
+    def post(self, request, *args, **kwargs):
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        
         user = auth.authenticate(username=username, password=password)
         if user:
             payload = jwt_payload_handler(user)
             token = {
-                'token': jwt.encode(payload, SECRET_KEY),
+                'token': jwt.encode(payload, SECRET_KEY).decode('utf-8'),
                 'status': 'success'
             }
             return JsonResponse(token)
@@ -37,7 +37,8 @@ class UserLoginViewJwt(APIView):
             })
 
 
-def GetMyUsername(request):
+def get_session_details(request):
+    '''
     token = request.GET.get('token')
     data = {'token': token}
     try:
@@ -46,7 +47,21 @@ def GetMyUsername(request):
             user = valid_data['user']
             return JsonResponse({"username": user.username})
     except Exception as ex:
-        return JsonResponse({"error": "Invalid Token"})
+        return JsonResponse({"error": "Invalid Token"}) 
+    '''
+    authenticator = TokenAuthentication()
+    auth = authenticator.authenticate(request)
+    if len(auth)>0 and auth[0]:
+        user = auth[0]
+        user_details = dict(
+            logged_in=True,
+            full_name=user.get_full_name(),
+            email=user.email
+        )
+
+        return JsonResponse(user_details)
+
+    return JsonResponse({'error': True, 'message': "No session data"})
 
 
 # - - - - -  - - - - - JWT Authentication Class - - - - -  - - - - -  - - - - -
@@ -61,7 +76,6 @@ class TokenAuthentication(BaseAuthentication):
 
     def authenticate(self, request):
         auth = get_authorization_header(request).split()
-        print("Authenticating JWT Token")
         # if not auth or auth[0].lower() != 'token':
         #     return None
 

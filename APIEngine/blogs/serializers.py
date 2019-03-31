@@ -48,7 +48,7 @@ class BlogListSerializer(ModelSerializer):
         model = Blog
         fields = [
             'title',
-            'content',
+            'pk',
             'user',
             'read_time',
             'publish',

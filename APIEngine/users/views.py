@@ -49,7 +49,6 @@ class ProfileListAPIView(ListAPIView):
 
 
 def session_details(request):
-    log.warn("session details : logged in user= {}".format(request.user))
     data = {
         'logged_in_user': request.session.get('username', 'Nobody'),
         'location': 'Nepal',
@@ -63,7 +62,7 @@ def login(request):
     password = request.GET.get("password") or request.POST.get("password")
     user = auth.authenticate(username=username, password=password)
     if user:
-        print("Successful login from: %s" % username)
+        # print("Successful login from: %s" % username)
         auth.login(request, user)
         request.session['username'] = username
         data = {

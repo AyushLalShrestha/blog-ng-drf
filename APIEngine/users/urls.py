@@ -1,6 +1,6 @@
 
 from .views import (login, logout, session_details, ProfileListAPIView)
-from .jwtauthenticator import (UserLoginViewJwt, GetMyUsername, TokenAuthentication)
+from .jwtauthenticator import (UserLoginViewJwt, get_session_details, TokenAuthentication)
 from django.conf.urls import url, include
 
 from rest_framework_jwt.views import (obtain_jwt_token, verify_jwt_token, refresh_jwt_token)
@@ -18,7 +18,7 @@ urlpatterns = [
     url(r'^api-token-refresh', refresh_jwt_token),
     url(r'^api-token-verify', verify_jwt_token),
     # url(r'^api-register-user', views.CreateUserView.as_view()),
-    url(r'^api-login-user', UserLoginViewJwt.as_view()),
-    url(r'^checkuname/', GetMyUsername, name='checktokentest'),
+    url(r'^api-token-login', UserLoginViewJwt.as_view()),
+    url(r'^sessionDetails/', get_session_details, name='checksessiondetails'),
     # url(r'^checktoken', TokenAuthentication.as_view()),
 ]

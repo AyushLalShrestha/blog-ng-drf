@@ -8,7 +8,6 @@ import { Blog } from '../blog.model';
   styleUrls: ['./blog-list.component.scss']
 })
 export class BlogListComponent implements OnInit {
-  // public blogs: Blog[] = [new Blog('a', 'a', 1, new Date(), 2, 'aush', 'asd', 'asd', 'asd', 'bio', 'loc', '123123')];
   public blogs: Blog[];
 
   constructor(private dataService: DataService) { }

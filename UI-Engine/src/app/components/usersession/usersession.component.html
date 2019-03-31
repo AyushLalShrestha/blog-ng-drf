@@ -1,20 +1,44 @@
+<ul materialize="collapsible" class="collapsible" data-collapsible="accordion">
+  <li>
+    <div class="collapsible-header"><i class="material-icons">person</i>Session details</div>
+    <div class="collapsible-body">
+      <div *ngIf="loggedInUser && loggedInUser.logged_in">
+        Logged IN as {{loggedInUser.email}}
+      </div>
 
-<form class="col-sm-5" novalidate #f="ngForm" (ngSubmit)="onLogin(f)">
-        <div class="form-group">
-          <label>Username</label>
-          <input type="text" class="form-control" name="username" ngModel  autocomplete="off" minlength="2" required #username="ngModel">
+      <div *ngIf="!loggedInUser">
+        Currently logged out, please login!
+      </div>
+
+
+    </div>
+  </li>
+  <li>
+    <div class="collapsible-header"><i class="fa fa-sign-in"></i>Login to website</div>
+    <div class="collapsible-body">
+      <form materialize class="col-sm-5" novalidate #f="ngForm" (ngSubmit)="onLogin(f)">
+        <div class="input-field">
+          <input type="text" class="form-control" name="username" ngModel autocomplete="off" minlength="2" required
+            #username="ngModel">
+          <label for='username'>Username</label>
           <div *ngIf="username.errors?.required && username.touched" class="alert alert-danger">Empty username!</div>
-          
+
         </div>
-        <div class="form-group">
-          <label>Password</label>
-          <input class="form-control" name="password" ngModel autocomplete="off" minlength="5" required #password="ngModel">
+        <div class="input-field">
+          <input type="text" name="password" ngModel autocomplete="off" minlength="5" required #password="ngModel">
+          <label for='password'>Password</label>
           <div *ngIf="password.errors?.required && password.touched" class="alert alert-danger">Empty password!</div>
-          
+
         </div>
         <input type="submit" class="btn" value="login">
-</form>
+      </form>
 
-<p>
-<button class="btn waves-effect waves-light red" (click)="onLogout()">Logout</button>
-
+    </div>
+  </li>
+  <li>
+    <div class="collapsible-header"><i class="material-icons">whatshot</i>Clear Session</div>
+    <div class="collapsible-body">
+      <button class="btn waves-effect waves-light red" (click)="onLogout()">Logout</button>
+    </div>
+  </li>
+</ul>

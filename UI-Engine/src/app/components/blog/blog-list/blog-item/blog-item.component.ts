@@ -18,7 +18,10 @@ export class BlogItemComponent implements OnInit {
   }
 
   onSelected() {
-    this.dataService.blogSelected.emit(this.blog);
+    this.dataService.getBlogDetail(this.blog['pk']).subscribe(detailedBlog => {
+      this.dataService.blogSelected.emit(detailedBlog);
+    });
+    
   }
 
 }

@@ -58,28 +58,27 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'APIEngine.urls'
 
-# CORS_ORIGIN_ALLOW_ALL = True
-CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_WHITELIST = (
-    'http://uiengine:4200' # Here was the problem indeed and it has to be http://localhost:3000, not http://localhost:3000/
+    'http://uiengine:4200',
+     # Here was the problem indeed and it has to be http://localhost:3000, not http://localhost:3000/
 )
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
+        # 'rest_framework.permissions.IsAuthenticated',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.BasicAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
+        # 'rest_framework.authentication.BasicAuthentication',
     ),
 }
 
-
 import datetime
 JWT_AUTH = {
-    'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=1000)
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=86400)
 }
 
 TEMPLATES = [

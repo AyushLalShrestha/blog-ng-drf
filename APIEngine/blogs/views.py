@@ -30,6 +30,7 @@ class BlogCreateAPIView(CreateAPIView):
     queryset = Blog.objects.all()
     serializer_class = BlogCreateSerializer
     permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
@@ -37,7 +38,7 @@ class BlogCreateAPIView(CreateAPIView):
 
 # List Blog API
 class BlogListAPIView(ListAPIView):
-    # authentication_classes = (TokenAuthentication)
+    # authentication_classes = ( TokenAuthentication )
     permission_classes = [ AllowAny ]
     serializer_class = BlogListSerializer
     filter_backends= [ SearchFilter, OrderingFilter ]
