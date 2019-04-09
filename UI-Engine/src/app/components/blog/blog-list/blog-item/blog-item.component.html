@@ -1,11 +1,13 @@
-<div (click)="onSelected()" class="blog-item-row">
+<div (click)="onSelected()">
   <td>{{blog.title}}</td>
   <td>{{blog.user.username}}</td>
   <td>{{blog.read_time}} minutes </td>
   <td>{{blog.publish}}</td>
   <td>
-    <button type="button" class="btn btn-small green" data-toggle="modal" data-target=".blog-detail-modal">
+    <!-- trigger add_blog modal  -->
+    <a class="btn btn-floating btn-large waves-effect waves-light blue " (click)="openBlogDetailDialog(blog.pk)">
       <i class="small material-icons" aria-hidden="true">chrome_reader_mode</i>
-    </button>
+    </a>
+
   </td>
 </div>

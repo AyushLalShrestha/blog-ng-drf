@@ -8,7 +8,7 @@ from rest_framework.filters import ( SearchFilter, OrderingFilter, )
 from rest_framework.generics import ( CreateAPIView, DestroyAPIView, ListAPIView, UpdateAPIView,
     RetrieveAPIView, RetrieveUpdateAPIView )
 
-from rest_framework.permissions import ( AllowAny, IsAuthenticated, IsAdminUser, 
+from rest_framework.permissions import ( AllowAny, IsAuthenticated, IsAdminUser,
     IsAuthenticatedOrReadOnly, )
 
 from .models import Blog
@@ -38,16 +38,16 @@ class BlogCreateAPIView(CreateAPIView):
 
 # List Blog API
 class BlogListAPIView(ListAPIView):
-    # authentication_classes = ( TokenAuthentication )
+    authentication_classes = ( TokenAuthentication, )
     permission_classes = [ AllowAny ]
     serializer_class = BlogListSerializer
     filter_backends= [ SearchFilter, OrderingFilter ]
     search_fields = ['title', 'content', 'user__first_name']
     pagination_class = BlogPageNumberPagination #PageNumberPagination
-    
+
     def get_queryset(self, *args, **kwargs):
         #queryset_list = super(PostListAPIView, self).get_queryset(*args, **kwargs)
-        queryset_list = Blog.objects.all() #filter(user=self.request.user)
+        queryset_list = Blog.objects.all().exclude(user=self.request.user) #filter(user=self.request.user)
         query = self.request.GET.get("q")
         if query:
             queryset_list = queryset_list.filter(
@@ -90,4 +90,4 @@ class UserList(generics.ListCreateAPIView):
         queryset = self.get_queryset()
         serializer = UserSerializer(queryset, many=True)
         return Response(serializer.data)
-"""        
+"""

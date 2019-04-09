@@ -16,57 +16,7 @@ from APIEngine.settings import SECRET_KEY
 jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
 jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
 
-
-class UserLoginViewJwt(APIView):
-    def post(self, request, *args, **kwargs):
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        
-        user = auth.authenticate(username=username, password=password)
-        if user:
-            payload = jwt_payload_handler(user)
-            token = {
-                'token': jwt.encode(payload, SECRET_KEY).decode('utf-8'),
-                'status': 'success'
-            }
-            return JsonResponse(token)
-        else:
-            return JsonResponse({
-                'error': 'Invalid credentials',
-                'status': 'failed'
-            })
-
-
-def get_session_details(request):
-    '''
-    token = request.GET.get('token')
-    data = {'token': token}
-    try:
-        valid_data = VerifyJSONWebTokenSerializer().validate(data)
-        if valid_data:
-            user = valid_data['user']
-            return JsonResponse({"username": user.username})
-    except Exception as ex:
-        return JsonResponse({"error": "Invalid Token"}) 
-    '''
-    authenticator = TokenAuthentication()
-    auth = authenticator.authenticate(request)
-    if len(auth)>0 and auth[0]:
-        user = auth[0]
-        user_details = dict(
-            logged_in=True,
-            full_name=user.get_full_name(),
-            email=user.email
-        )
-
-        return JsonResponse(user_details)
-
-    return JsonResponse({'error': True, 'message': "No session data"})
-
-
 # - - - - -  - - - - - JWT Authentication Class - - - - -  - - - - -  - - - - -
-
-
 class TokenAuthentication(BaseAuthentication):
 
     model = None
@@ -75,16 +25,19 @@ class TokenAuthentication(BaseAuthentication):
         return User
 
     def authenticate(self, request):
-        auth = get_authorization_header(request).split()
-        # if not auth or auth[0].lower() != 'token':
-        #     return None
+        try:
+            auth = get_authorization_header(request).split()
+            # if not auth or auth[0].lower() != 'token':
+            #     return None
 
-        if len(auth) == 1:
-            msg = 'Invalid token header. No credentials provided.'
-            raise exceptions.AuthenticationFailed(msg)
-        elif len(auth) > 2:
-            msg = 'Invalid token header'
-            raise exceptions.AuthenticationFailed(msg)
+            if len(auth) == 1:
+                msg = 'Invalid token header. No credentials provided.'
+                raise exceptions.AuthenticationFailed(msg)
+            elif len(auth) > 2:
+                msg = 'Invalid token header'
+                raise exceptions.AuthenticationFailed(msg)
+        except AuthenticationFailed as auth_ex:
+            return JsonResponse({'success': False, 'message': 'Authentication Failed. {}'.format(msg)})
 
         try:
             token = auth[1]
@@ -125,3 +78,51 @@ class TokenAuthentication(BaseAuthentication):
 
     def authenticate_header(self, request):
         return 'Token'
+
+
+class UserLoginViewJwt(APIView):
+    def post(self, request, *args, **kwargs):
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = auth.authenticate(username=username, password=password)
+        if user:
+            payload = jwt_payload_handler(user)
+            token = {
+                'token': jwt.encode(payload, SECRET_KEY).decode('utf-8'),
+                'success': True
+            }
+            return JsonResponse(token)
+        else:
+            return JsonResponse({
+                'error': 'Invalid credentials',
+                'success': False
+            })
+
+
+def get_session_details(request):
+    '''
+    token = request.GET.get('token')
+    data = {'token': token}
+    try:
+        valid_data = VerifyJSONWebTokenSerializer().validate(data)
+        if valid_data:
+            user = valid_data['user']
+            return JsonResponse({"username": user.username})
+    except Exception as ex:
+        return JsonResponse({"error": "Invalid Token"})
+    '''
+    authenticator = TokenAuthentication()
+    auth = authenticator.authenticate(request)
+    if len(auth)>0 and auth[0] and isinstance(auth[0], User):
+        user = auth[0]
+        user_details = dict(
+            logged_in=True,
+            full_name=user.get_full_name(),
+            email=user.email
+        )
+
+        return JsonResponse(user_details)
+
+    return JsonResponse({'error': True, 'message': "No session data"})
+

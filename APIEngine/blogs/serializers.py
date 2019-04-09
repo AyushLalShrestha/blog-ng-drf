@@ -71,6 +71,7 @@ class BlogDetailSerializer(ModelSerializer):
             'title',
             'slug',
             'content',
+            'read_time',
             # 'html',
             'publish',
             'image',

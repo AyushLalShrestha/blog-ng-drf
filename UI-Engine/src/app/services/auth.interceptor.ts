@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { CookieXSRFStrategy } from '@angular/http';
 
 @Injectable()
-export class MyHttpXsrfInterceptor implements HttpInterceptor {
+export class MyHttpInterceptor implements HttpInterceptor {
 
     // constructor(private tokenExtractor: HttpXsrfTokenExtractor) { }
     constructor() { }

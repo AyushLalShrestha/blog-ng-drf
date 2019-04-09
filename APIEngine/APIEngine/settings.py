@@ -78,7 +78,7 @@ REST_FRAMEWORK = {
 
 import datetime
 JWT_AUTH = {
-    'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=86400)
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=604800)
 }
 
 TEMPLATES = [

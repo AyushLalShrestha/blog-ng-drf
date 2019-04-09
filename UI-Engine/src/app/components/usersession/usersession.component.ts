@@ -1,6 +1,7 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter, ViewChild } from '@angular/core';
 import { DataService } from '../../services/data-service.service';
 import { UserProfile } from '../user/user-profile.model';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-usersession',
@@ -9,6 +10,7 @@ import { UserProfile } from '../user/user-profile.model';
 })
 export class UsersessionComponent implements OnInit {
   loggedInUser: any ;
+  
 
   constructor(private dataService: DataService) { }
 
@@ -16,16 +18,21 @@ export class UsersessionComponent implements OnInit {
     this.updateSessionDetails();
   }
 
-  onLogin(f) {
+  onLogin(f: NgForm) {
     const data = {
       username: f.value.username,
       password: f.value.password,
     };
     this.dataService.login(data).subscribe(
       res => {
-        localStorage.setItem('jwt_token', res['token']);
-        this.updateSessionDetails();
-        alert("Successfully logged in!")
+        if (res['success'] === true) {
+          localStorage.setItem('jwt_token', res['token']);
+          this.updateSessionDetails();
+          alert("Successfully logged in!")
+        } else if (res['error']) {
+          alert(res['error']);  
+        }
+        
       },
       err => {
         alert("error logging in");
@@ -34,7 +41,7 @@ export class UsersessionComponent implements OnInit {
 
   }
   onLogout(){
-    alert("logging out");
+    alert("Logged out");
     localStorage.removeItem("jwt_token");
     this.updateSessionDetails();
   }

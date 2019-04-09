@@ -3,7 +3,7 @@
     <div class="collapsible-header"><i class="material-icons">person</i>Session details</div>
     <div class="collapsible-body">
       <div *ngIf="loggedInUser && loggedInUser.logged_in">
-        Logged IN as {{loggedInUser.email}}
+        Currently Logged In as {{loggedInUser.full_name}} (email: {{loggedInUser.email}})
       </div>
 
       <div *ngIf="!loggedInUser">
@@ -18,7 +18,7 @@
     <div class="collapsible-body">
       <form materialize class="col-sm-5" novalidate #f="ngForm" (ngSubmit)="onLogin(f)">
         <div class="input-field">
-          <input type="text" class="form-control" name="username" ngModel autocomplete="off" minlength="2" required
+          <input type="text" name="username" ngModel autocomplete="off" minlength="2" required
             #username="ngModel">
           <label for='username'>Username</label>
           <div *ngIf="username.errors?.required && username.touched" class="alert alert-danger">Empty username!</div>
@@ -30,7 +30,7 @@
           <div *ngIf="password.errors?.required && password.touched" class="alert alert-danger">Empty password!</div>
 
         </div>
-        <input type="submit" class="btn" value="login">
+        <input type="submit" class="btn" [disabled]="!f.valid" value="login">
       </form>
 
     </div>

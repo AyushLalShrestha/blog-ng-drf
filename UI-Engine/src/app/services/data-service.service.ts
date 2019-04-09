@@ -16,7 +16,7 @@ export class DataService {
   getBlogs(pageNumber: Number = 1) {
     return this.http.get<Blog[]>(this.baseURL + '/blog/list/?page=' + pageNumber);
   }
-  getBlogDetail(pk: Number = 1){
+  getBlogDetail(pk: any = 1){
     return this.http.get<Blog>(this.baseURL + '/blog/' + pk + '/');
   }
   newBlog(data) {

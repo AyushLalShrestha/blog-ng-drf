@@ -1,0 +1,11 @@
+TODOS for the app in next step:
+
+1. Create an update api endpoint in the backend so that PUT method will be supported to edit 
+    blogs, current user details etc
+  - Implement it in the UI as well
+
+2. Blog details should be more viewable
+
+3. Implement adding images in a blog
+ - images must dynamically and effectively load in the UI as well
+ 
