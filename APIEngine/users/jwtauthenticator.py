@@ -16,9 +16,9 @@ from APIEngine.settings import SECRET_KEY
 jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
 jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
 
+
 # - - - - -  - - - - - JWT Authentication Class - - - - -  - - - - -  - - - - -
 class TokenAuthentication(BaseAuthentication):
-
     model = None
 
     def get_model(self):
@@ -101,20 +101,9 @@ class UserLoginViewJwt(APIView):
 
 
 def get_session_details(request):
-    '''
-    token = request.GET.get('token')
-    data = {'token': token}
-    try:
-        valid_data = VerifyJSONWebTokenSerializer().validate(data)
-        if valid_data:
-            user = valid_data['user']
-            return JsonResponse({"username": user.username})
-    except Exception as ex:
-        return JsonResponse({"error": "Invalid Token"})
-    '''
     authenticator = TokenAuthentication()
     auth = authenticator.authenticate(request)
-    if len(auth)>0 and auth[0] and isinstance(auth[0], User):
+    if len(auth) > 0 and auth[0] and isinstance(auth[0], User):
         user = auth[0]
         user_details = dict(
             logged_in=True,
@@ -125,4 +114,3 @@ def get_session_details(request):
         return JsonResponse(user_details)
 
     return JsonResponse({'error': True, 'message': "No session data"})
-

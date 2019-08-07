@@ -37,6 +37,13 @@ export class DataService {
     formData.append('username', data.username);
     formData.append('password', data.password);
     return this.http.post(this.baseURL + '/user/api-token-login/', formData);
+
+    // const formData = new FormData();
+    // formData.append('CSRFToken', 'admin');
+    // formData.append('password', 'changeme');
+    // return this.http.post('https://10.45.3.122/Loginspect/extract?id=true', formData);
+    
+
   }
   getSessionDetails(){
     return this.http.get<any>(this.baseURL + '/user/sessionDetails/', {withCredentials: true});

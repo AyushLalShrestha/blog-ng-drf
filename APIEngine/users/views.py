@@ -78,8 +78,6 @@ def login(request):
     return JsonResponse(data)
 
 
-
-        
 def logout(request):
     name = "Nobody was logged in"
     if request.user:

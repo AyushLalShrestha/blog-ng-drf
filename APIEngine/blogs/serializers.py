@@ -4,7 +4,6 @@ from rest_framework.serializers import (HyperlinkedIdentityField, SerializerMeth
 
 from django.contrib.auth import get_user_model
 from .models import Blog
-# from users.serializers import UserDetailSerializer
 from users.models import Profile
 
 User = get_user_model()
@@ -30,6 +29,7 @@ class BlogProfileListSerializer(ModelSerializer):
             'phone'
         ]
 
+
 class BlogUserDetailSerializer(ModelSerializer):
     profile = BlogProfileListSerializer(read_only=True)
     class Meta:
@@ -41,6 +41,7 @@ class BlogUserDetailSerializer(ModelSerializer):
             'last_name',
             'profile'
         ]
+
 
 class BlogListSerializer(ModelSerializer):
     user = BlogUserDetailSerializer(read_only=True)
@@ -63,6 +64,7 @@ class BlogDetailSerializer(ModelSerializer):
     # image = SerializerMethodField()
     # html = SerializerMethodField()
     # comments = SerializerMethodField()
+
     class Meta:
         model = Blog
         fields = [
@@ -92,7 +94,3 @@ class BlogDetailSerializer(ModelSerializer):
     #     c_qs = Comment.objects.filter_by_instance(obj)
     #     comments = CommentSerializer(c_qs, many=True).data
     #     return comments
-
-
-
-
