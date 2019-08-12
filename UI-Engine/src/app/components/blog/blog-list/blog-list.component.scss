@@ -1,19 +1,19 @@
-app-user-item:nth-of-type(odd){
-    tr{
-        font-weight: bold;
-        background-color: lighten(#535876 , 10%);
-        &:hover{
-            background-color: darken(#535876 , 10%);
-        }
-    }
-}
+// app-user-item:nth-of-type(odd){
+//     tr{
+//         font-weight: bold;
+//         background-color: lighten(#535876 , 10%);
+//         &:hover{
+//             background-color: darken(#535876 , 10%);
+//         }
+//     }
+// }
 
-.user-item-row{
+// .user-item-row{
     
-        font-weight: bold;
-        background-color: lighten(#535876 , 10%);
-        &:hover{
-            background-color: darken(#535876 , 10%);
-        }
-    }
+//         font-weight: bold;
+//         background-color: lighten(#535876 , 10%);
+//         &:hover{
+//             background-color: darken(#535876 , 10%);
+//         }
+//     }
 

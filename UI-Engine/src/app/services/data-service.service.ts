@@ -1,6 +1,9 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 
+import { ShortMessageComponent } from '../components/shared/snackbar/snackbar.component'
+import { MatSnackBar } from '@angular/material';
+
 
 import { Blog, User } from '../components/blog/blog.model';
 import { UserProfile } from '../components/user/user-profile.model';
@@ -10,7 +13,7 @@ export class DataService {
   blogSelected = new EventEmitter<Blog>();
   baseURL = 'http://localhost:5050';
 
-  constructor(public http: HttpClient) { 
+  constructor(public http: HttpClient, private _snackBar: MatSnackBar) { 
   }
 
   getBlogs(pageNumber: Number = 1) {
@@ -48,7 +51,18 @@ export class DataService {
   getSessionDetails(){
     return this.http.get<any>(this.baseURL + '/user/sessionDetails/', {withCredentials: true});
   }
-
+  openSnackBar(message, success=true) {
+    var data = {
+      message: message,
+      success: success
+    };
+    
+    this._snackBar.openFromComponent(ShortMessageComponent, {
+      duration: 2000, 
+      data: data,
+      announcementMessage: 'THis is something'
+    });
+  }
   
 }
 

@@ -30,10 +30,10 @@ export class BlogAddComponent implements OnInit {
     };
     this.dataService.newBlog(data).subscribe(
       res => {
-        alert('successfully posted');
+        this.dataService.openSnackBar("Successfully posted");
       },
       err => {
-        alert('Error occured');
+        this.dataService.openSnackBar("Post failed");
       }
     );
 

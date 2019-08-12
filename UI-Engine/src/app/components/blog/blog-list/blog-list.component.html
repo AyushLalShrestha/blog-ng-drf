@@ -1,12 +1,18 @@
-<div class="col-10">
-  <table materialize class="striped">
-    <tr>
-      <th scope="col"> Blogs </th>
-    </tr>
+<!--  Trying materialize table -->
+<mat-form-field>
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+</mat-form-field>
 
-    <tr *ngFor="let blogEl of blogs">
-      <app-blog-item [blog]="blogEl"></app-blog-item>
-    </tr>
-    <!-- <app-blog-item *ngFor="let blogEl of blogs" [blog]="blogEl"></app-blog-item> -->
-  </table>
+<div class="mat-elevation-z8">
+  <mat-table #table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="{{column.id}}" *ngFor="let column of columnNames">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{column.value}} </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element[column.id]}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <mat-paginator [length]="resultsLength" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
 </div>

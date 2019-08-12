@@ -11,7 +11,8 @@ import { MatDialogModule, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angu
 export class BlogDetailComponent implements OnInit {
   blog: Blog;
 
-  constructor(private dataService: DataService, public dialogRef: MatDialogRef<BlogDetailComponent>,
+  constructor(private dataService: DataService,
+     public dialogRef: MatDialogRef<BlogDetailComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
   ngOnInit() {

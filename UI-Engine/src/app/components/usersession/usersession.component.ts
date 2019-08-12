@@ -1,6 +1,5 @@
-import { Component, OnInit, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, Inject, EventEmitter, ViewChild } from '@angular/core';
 import { DataService } from '../../services/data-service.service';
-import { UserProfile } from '../user/user-profile.model';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -9,9 +8,8 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./usersession.component.css']
 })
 export class UsersessionComponent implements OnInit {
-  loggedInUser: any ;
+  loggedInUser: any;
   
-
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
@@ -28,31 +26,36 @@ export class UsersessionComponent implements OnInit {
         if (res['success'] === true) {
           localStorage.setItem('jwt_token', res['token']);
           this.updateSessionDetails();
-          alert("Successfully logged in!")
+          this.dataService.openSnackBar("Logged in as " + data.username);
         } else if (res['error']) {
-          alert(res['error']);  
+          this.dataService.openSnackBar("Login failed", false);
         }
-        
+
       },
       err => {
-        alert("error logging in");
+        this.dataService.openSnackBar("error logging in", false);
       }
     );
 
   }
-  onLogout(){
-    alert("Logged out");
+  onLogout() {
     localStorage.removeItem("jwt_token");
     this.updateSessionDetails();
+    this.dataService.openSnackBar("Logged out! !");
   }
-  updateSessionDetails(){
-    this.dataService.getSessionDetails().subscribe(
-      res => {
-        this.loggedInUser = res;
-      },
-      err => {
-        console.log(err);
-      }
-    );
+  updateSessionDetails() {
+    if (localStorage.getItem('jwt_token')) {
+      this.dataService.getSessionDetails().subscribe(
+        res => {
+          this.loggedInUser = res;
+        },
+        err => {
+          this.dataService.openSnackBar("Error retrieving session details", false);
+        }
+      );
+    } else {
+      this.loggedInUser = null;
+    }
+    
   }
 }

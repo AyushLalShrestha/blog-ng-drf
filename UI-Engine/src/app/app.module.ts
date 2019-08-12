@@ -3,7 +3,14 @@ import { MaterializeModule } from 'angular2-materialize';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { MatButtonModule, MatFormFieldModule, MatInputModule, MatRippleModule } from '@angular/material';
+import {
+  MatButtonModule, MatFormFieldModule, MatInputModule, MatRippleModule,
+  MatCardModule, MatProgressSpinnerModule, MatMenuModule, MatIconModule,
+  MatTableModule, MatCheckboxModule, MatToolbarModule, MatSnackBarModule,
+  MatSelectModule, MatSortModule, MatPaginatorModule, MatCheckbox
+} from '@angular/material';
+
+// import { MatTableModule } from '@angular/material/table';
 
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -25,6 +32,7 @@ import { BlogDetailComponent } from './components/blog/blog-detail/blog-detail.c
 import { BlogAddComponent } from './components/blog/blog-add/blog-add.component';
 import { UserComponent } from './components/user/user.component';
 import { UsersessionComponent } from './components/usersession/usersession.component';
+import { ShortMessageComponent } from './components/shared/snackbar/snackbar.component';
 
 const appRoutes: Routes = [
   { path: '', component: BlogComponent },
@@ -34,10 +42,11 @@ const appRoutes: Routes = [
 
 @NgModule({
   declarations: [
-    AppComponent, BlogComponent , BlogAddComponent, BlogListComponent, BlogItemComponent,
+    AppComponent, BlogComponent, BlogAddComponent, BlogListComponent, BlogItemComponent,
     BlogDetailComponent,
     UserComponent,
-    UsersessionComponent
+    UsersessionComponent,
+    ShortMessageComponent
   ],
   imports: [
     BrowserModule,
@@ -45,23 +54,34 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
-    
+
     MaterializeModule,
     MatDialogModule,
+    MatRippleModule,
+    MatCardModule,
+    MatProgressSpinnerModule,
+    MatMenuModule,
+    MatIconModule,
+    MatToolbarModule,
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    MatRippleModule
-    
+    MatSelectModule,
+    MatSortModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatCheckboxModule,
+    MatSnackBarModule
+
   ],
-  providers: [ 
+  providers: [
     DataService,
-    { provide: HTTP_INTERCEPTORS, useClass: MyHttpInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: MyHttpInterceptor, multi: true }
     // { provide: MatDialogRef, useValue: {} },
   ],
-  bootstrap: [AppComponent], 
+  bootstrap: [AppComponent],
   entryComponents: [
-    BlogDetailComponent, BlogAddComponent
+    BlogDetailComponent, BlogAddComponent, ShortMessageComponent
   ]
 })
 export class AppModule { }

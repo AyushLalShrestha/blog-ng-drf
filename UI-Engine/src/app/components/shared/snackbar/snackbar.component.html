@@ -1,0 +1,9 @@
+
+<div *ngIf="data.success">
+    <div class='success-message'> {{ data.message }} </div>    
+</div>
+
+<div *ngIf="!data.success">
+    <div class='error-message'>{{ data.message }} </div>    
+</div>
+

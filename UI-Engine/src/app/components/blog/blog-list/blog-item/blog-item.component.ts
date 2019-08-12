@@ -27,7 +27,8 @@ export class BlogItemComponent implements OnInit {
   }
   openBlogDetailDialog(blogPK: String): void {
     const dialogRef = this.dialog.open(BlogDetailComponent, {
-      // width: '250px',
+      width: '250px',
+      height: '300px',
       disableClose: false,
       hasBackdrop: false,
       data: { blogPK: blogPK}
