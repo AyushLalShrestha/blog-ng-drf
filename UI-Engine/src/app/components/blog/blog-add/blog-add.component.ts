@@ -14,8 +14,8 @@ export class BlogAddComponent implements OnInit {
   content: String;
   publishDate: String;
 
-  constructor(private dataService: DataService, 
-               public dialogRef: MatDialogRef<BlogAddComponent>) { }
+  constructor(private dataService: DataService,
+    public dialogRef: MatDialogRef<BlogAddComponent>) { }
 
   ngOnInit() {
     this.title = '';
@@ -39,7 +39,7 @@ export class BlogAddComponent implements OnInit {
 
   }
   onCloseClick(): void {
-   this.dialogRef.close();
- }
+    this.dialogRef.close();
+  }
 
 }

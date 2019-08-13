@@ -12,7 +12,7 @@ export class BlogDetailComponent implements OnInit {
   blog: Blog;
 
   constructor(private dataService: DataService,
-     public dialogRef: MatDialogRef<BlogDetailComponent>,
+    public dialogRef: MatDialogRef<BlogDetailComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
   ngOnInit() {

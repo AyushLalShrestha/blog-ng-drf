@@ -1,6 +1,6 @@
-// import { Ingredient } from '../shared/ingredient.model';
 
 export class Blog {
+    public blog_pk: number;
     public title: string;
     public content: string;
     public user: User;
@@ -8,8 +8,9 @@ export class Blog {
     public publish: Date;
     public claps: number;
 
-    constructor(title: string, content: string, read_time: number, publish: Date, claps: number,
+    constructor(blog_pk: number,title: string, content: string, read_time: number, publish: Date, claps: number,
         username: string, email: string, first_name: string, last_name: string, bio: string, location: string, phone: string) {
+        this.blog_pk = blog_pk;
         this.title = title;
         this.content = content;
         this.read_time = read_time;
