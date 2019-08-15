@@ -16,6 +16,7 @@ class BlogCreateSerializer(ModelSerializer):
             'title',
             'content',
             'publish',
+            'image'
         ]
 
 

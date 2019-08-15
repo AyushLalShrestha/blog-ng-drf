@@ -27,47 +27,18 @@ export class BlogComponent implements OnInit {
     );
   }
 
-  openAddBlogDialog():void {
+  openAddBlogDialog(): void {
     const dialogRef = this.dialog.open(BlogAddComponent, {
       width: '850px',
-      height: '600px'
+      height: '700px',
+      disableClose: false,
+      hasBackdrop: true,
+      autoFocus: false,
+      maxHeight: '90vh',
+      maxWidth: '80vw',
+      minWidth: '80vw',
     });
   }
-
-  /* openDialog(): void {
-    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
-      width: '250px',
-      data: { name: this.name, animal: this.animal }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      this.animal = result;
-    });
-  } */
 
 }
 
-// This was for the example modal, dialog
-/* export interface DialogData {
-  animal: string;
-  name: string;
-}
-
-@Component({
-  selector: 'dialog-overview-example-dialog',
-  templateUrl: './dialog-overview-example-dialog.html',
-})
-export class DialogOverviewExampleDialog implements OnInit {
-
-  constructor(public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {
-
-  }
-  ngOnInit(){
-    alert("Initialized");
-  }
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-} */

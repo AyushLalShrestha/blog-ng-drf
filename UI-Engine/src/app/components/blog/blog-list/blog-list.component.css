@@ -1,17 +1,4 @@
-table {
-    width: 100%;
-  }
-  
-  .mat-form-field {
-    font-size: 14px;
-    width: 100%;
-  }
-  
-  td, th {
-    width: 25%;
-  }
-
-/* Structure */
+/* 
 .example-container {
   position: relative;
   min-height: 200px;
@@ -42,7 +29,7 @@ table {
   text-align: center;
 }
 
-/* Column Widths */
+
 .mat-column-number,
 .mat-column-state {
   max-width: 64px;
@@ -50,4 +37,4 @@ table {
 
 .mat-column-created {
   max-width: 124px;
-}
+} */

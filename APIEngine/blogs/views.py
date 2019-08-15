@@ -11,6 +11,8 @@ from rest_framework.generics import (CreateAPIView, DestroyAPIView, ListAPIView,
 from rest_framework.permissions import (AllowAny, IsAuthenticated, IsAdminUser,
                                         IsAuthenticatedOrReadOnly, )
 
+from rest_framework.authentication import SessionAuthentication
+
 from .models import Blog
 
 # from .pagination import PostLimitOffsetPagination, PostPageNumberPagination
@@ -48,8 +50,14 @@ class BlogListAPIView(ListAPIView):
 
     def get_queryset(self, *args, **kwargs):
         #queryset_list = super(PostListAPIView, self).get_queryset(*args, **kwargs)
-        queryset_list = Blog.objects.all().exclude(
-            user=self.request.user)  # filter(user=self.request.user)
+
+        selfs_blog = self.request.GET.get("selfs_blog")
+        if not selfs_blog:
+            queryset_list = Blog.objects.all().exclude(
+                user=self.request.user)
+        else:
+            queryset_list = Blog.objects.all().filter(user=self.request.user)
+            
         query = self.request.GET.get("q")
         if query:
             queryset_list = queryset_list.filter(
@@ -74,6 +82,7 @@ class BlogDetailAPIView(RetrieveAPIView):
 @method_decorator(csrf_exempt, name='dispatch')
 class BlogUpdateAPIView(RetrieveUpdateAPIView):
     queryset = Blog.objects.all()
+    authentication_classes = (TokenAuthentication)
     serializer_class = BlogCreateSerializer
     permission_classes = [IsAuthenticated, IsOwner]
 

@@ -79,7 +79,7 @@ export class BlogListComponent implements OnInit {
       data: { blogPK: blogPK},
       autoFocus: false,
       maxHeight: '90vh',
-      maxWidth: '90vw',
+      maxWidth: '80vw',
       minWidth: '80vw',
     });
   }

@@ -10,7 +10,6 @@ import {
   MatSelectModule, MatSortModule, MatPaginatorModule, MatCheckbox
 } from '@angular/material';
 
-// import { MatTableModule } from '@angular/material/table';
 
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -33,6 +32,7 @@ import { BlogAddComponent } from './components/blog/blog-add/blog-add.component'
 import { UserComponent } from './components/user/user.component';
 import { UsersessionComponent } from './components/usersession/usersession.component';
 import { ShortMessageComponent } from './components/shared/snackbar/snackbar.component';
+import { UsersBlogListComponent } from './components/blog/users-blog-list/users-blog-list.component';
 
 const appRoutes: Routes = [
   { path: '', component: BlogComponent },
@@ -46,7 +46,8 @@ const appRoutes: Routes = [
     BlogDetailComponent,
     UserComponent,
     UsersessionComponent,
-    ShortMessageComponent
+    ShortMessageComponent,
+    UsersBlogListComponent
   ],
   imports: [
     BrowserModule,

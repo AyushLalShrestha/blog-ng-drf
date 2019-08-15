@@ -13,7 +13,9 @@ export class BlogDetailComponent implements OnInit {
 
   constructor(private dataService: DataService,
     public dialogRef: MatDialogRef<BlogDetailComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+    @Inject(MAT_DIALOG_DATA) public data: BlogData) {
+      this.blog = null;
+     }
 
   ngOnInit() {
     this.dataService.getBlogDetail(this.data.blogPK).subscribe(detailedBlog => {
@@ -24,6 +26,6 @@ export class BlogDetailComponent implements OnInit {
 
 }
 
-export interface DialogData {
+export interface BlogData {
   blogPK: string;
 }

@@ -1,9 +1,13 @@
-
-<h1 mat-dialog-title> {{blog.title}}  </h1>
+<h1 mat-dialog-title> {{blog.title}} </h1>
 <div mat-dialog-content>
+
   <div class="row" style="color: #6f6f6f">
     <div> by {{ blog.user.username }} at {{blog.user.email}} </div> &nbsp;
     <div> - {{blog.read_time}} minute <i class="fa fa-clock-o" aria-hidden="true"></i> </div>
+  </div>
+  
+  <div *ngIf="blog && blog.image && blog.image != null">
+      <img class="responsive-img blog-title-image" src={{blog.image}}>
   </div>
 
   <div class="row blog-content" style="margin-top: 10px;">

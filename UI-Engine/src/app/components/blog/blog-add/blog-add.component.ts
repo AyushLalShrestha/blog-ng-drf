@@ -2,7 +2,6 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { Blog } from './../blog.model';
 import { DataService } from '../../../services/data-service.service';
 import { MatDialogModule, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatButtonModule, MatFormFieldModule, MatInputModule, MatRippleModule } from '@angular/material';
 
 @Component({
   selector: 'app-blog-add',
@@ -13,6 +12,7 @@ export class BlogAddComponent implements OnInit {
   title: String;
   content: String;
   publishDate: String;
+  selectedImage: File;
 
   constructor(private dataService: DataService,
     public dialogRef: MatDialogRef<BlogAddComponent>) { }
@@ -23,10 +23,11 @@ export class BlogAddComponent implements OnInit {
   }
 
   onSubmit(f) {
+    console.log(this.selectedImage);
     const data = {
       title: f.value.title,
       content: f.value.content,
-      publish: '2018-06-12'
+      image: this.selectedImage
     };
     this.dataService.newBlog(data).subscribe(
       res => {
@@ -41,5 +42,10 @@ export class BlogAddComponent implements OnInit {
   onCloseClick(): void {
     this.dialogRef.close();
   }
+  onImageChanged(event) {
+    const file = event.target.files[0];
+    this.selectedImage = file;
+  }
 
 }
+
