@@ -14,9 +14,10 @@
   <li>
     <div class="collapsible-header"><i class="fa fa-sign-in"></i>Login in to the website</div>
     <div class="collapsible-body">
-      <form materialize class="example-container" novalidate #f="ngForm" >
+      <form materialize class="example-container" novalidate #f="ngForm">
         <mat-form-field>
-          <input matInput type="text" name="username" ngModel autocomplete="off" minlength="2" placeholder='Enter yout username' required #username="ngModel">
+          <input matInput type="text" name="username" ngModel autocomplete="off" minlength="2"
+            placeholder='Enter yout username' required #username="ngModel">
         </mat-form-field>
         <br>
         <mat-form-field>
@@ -39,4 +40,33 @@
       <button class="btn waves-effect waves-light red" (click)="onLogout()">Logout</button>
     </div>
   </li>
+
+  <li>
+    <div class="collapsible-header"><i class="material-icons">whatshot</i>Login</div>
+    <div class="collapsible-body">
+      <mat-card class="loginCard">
+        <mat-card-content>
+          <form [formGroup]="loginForm" (ngSubmit)="doLogin(loginForm)" class="myForm">
+            <mat-form-field class="fullWidth">
+              <mat-label>
+                Username:
+              </mat-label>
+              <input matInput type="text" formControlName="userName" autocomplete="off">
+            </mat-form-field>
+            <mat-form-field class="fullWidth">
+              <mat-label>
+                Password:
+              </mat-label>
+              <input matInput type="password" formControlName="password" autocomplete="off">
+            </mat-form-field>
+            <button mat-button type="submit">Login</button>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+  </li>
+
+
+
 </ul>

@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { Blog } from './../blog.model';
 import { DataService } from '../../../services/data-service.service';
 import { MatDialogModule, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-blog-add',
@@ -10,43 +11,48 @@ import { MatDialogModule, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angu
 })
 export class BlogAddComponent implements OnInit {
   editAction: boolean;
-  blog: Blog;
-  
-  title: String;
-  content: String;
+  blogPK: any;
+
   selectedImage: File;
+  blogForm = new FormGroup({
+    title: new FormControl(''),
+    content: new FormControl(''),
+  });
 
   constructor(private dataService: DataService,
-    public dialogRef: MatDialogRef<BlogAddComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { 
-      this.blog = null;
-      this.editAction = false;
-    }
+              public dialogRef: MatDialogRef<BlogAddComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any) {
+    this.editAction = false;
+    this.blogPK = null;
+  }
 
   ngOnInit() {
-    if (this.data && this.data.edit == true && this.data.blogPK){
+    if (this.data && this.data.edit == true && this.data.blogPK) {
       this.editAction = true;
       this.dataService.editBlog(this.data, true).subscribe(
         detailedBlog => {
-          this.blog = detailedBlog;
-          this.blog.blog_pk = this.data.blogPK;
-          this.title = detailedBlog.title;
-          this.content = detailedBlog.content;
+          this.blogForm = new FormGroup({
+            title: new FormControl(detailedBlog.title),
+            content: new FormControl(detailedBlog.content)
+          });
+          this.blogPK = this.data.blogPK;
         }
       )
     } else {
       this.editAction = false;
-      
     }
+    
   }
 
-  onSubmit(f) {
+  onSubmit() {
+    var values = this.blogForm.value;
+    
     const data = {
-      title: f.value.title,
-      content: f.value.content,
+      title: values.title,
+      content: values.content,
       image: this.selectedImage
     };
-    if (!this.editAction){
+    if (!this.editAction) {
       this.dataService.newBlog(data).subscribe(
         res => {
           this.dataService.openSnackBar("Successfully posted");
@@ -56,7 +62,7 @@ export class BlogAddComponent implements OnInit {
         }
       );
     } else {
-      data['blogPK'] = this.blog.blog_pk;
+      data['blogPK'] = this.blogPK;
       this.dataService.editBlog(data, false).subscribe(
         res => {
           this.dataService.openSnackBar("Successfully edited");
@@ -66,7 +72,7 @@ export class BlogAddComponent implements OnInit {
         }
       );
     }
-    
+
 
   }
   onCloseClick(): void {

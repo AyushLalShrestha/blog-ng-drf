@@ -6,3 +6,19 @@
   .example-container > * {
     width: 100%;
   }
+
+  .loginCard {
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .myForm{
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .fullWidth {
+    width: 100%;
+  }
