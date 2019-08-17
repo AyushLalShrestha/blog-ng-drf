@@ -9,14 +9,13 @@ from rest_framework.generics import (CreateAPIView, DestroyAPIView, ListAPIView,
                                      RetrieveAPIView, RetrieveUpdateAPIView)
 
 from rest_framework.permissions import (AllowAny, IsAuthenticated, IsAdminUser,
-                                        IsAuthenticatedOrReadOnly, )
+                                        IsAuthenticatedOrReadOnly )
 
 from rest_framework.authentication import SessionAuthentication
 
 from .models import Blog
 
-# from .pagination import PostLimitOffsetPagination, PostPageNumberPagination
-from .permissions import IsOwner
+from .permissions import IsOwner, IsOwnerOrReadOnly
 from .serializers import (BlogCreateSerializer,
                           BlogListSerializer, BlogDetailSerializer)
 from .pagination import BlogPageNumberPagination
@@ -32,8 +31,8 @@ from django.views.decorators.csrf import csrf_exempt
 class BlogCreateAPIView(CreateAPIView):
     queryset = Blog.objects.all()
     serializer_class = BlogCreateSerializer
-    permission_classes = [IsAuthenticated]
-    authentication_classes = [TokenAuthentication]
+    permission_classes = [ IsAuthenticated ]
+    authentication_classes = [ TokenAuthentication ]
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
@@ -41,10 +40,10 @@ class BlogCreateAPIView(CreateAPIView):
 
 # List Blog API
 class BlogListAPIView(ListAPIView):
-    authentication_classes = (TokenAuthentication, )
-    permission_classes = [AllowAny]
+    authentication_classes = [ TokenAuthentication ]
+    permission_classes = [ AllowAny ]
     serializer_class = BlogListSerializer
-    filter_backends = [SearchFilter, OrderingFilter]
+    filter_backends = [ SearchFilter, OrderingFilter ]
     search_fields = ['title', 'content', 'user__first_name']
     pagination_class = BlogPageNumberPagination  # PageNumberPagination
 
@@ -57,7 +56,7 @@ class BlogListAPIView(ListAPIView):
                 user=self.request.user)
         else:
             queryset_list = Blog.objects.all().filter(user=self.request.user)
-            
+
         query = self.request.GET.get("q")
         if query:
             queryset_list = queryset_list.filter(
@@ -73,8 +72,8 @@ class BlogListAPIView(ListAPIView):
 class BlogDetailAPIView(RetrieveAPIView):
     queryset = Blog.objects.all()
     serializer_class = BlogDetailSerializer
-    # lookup_field = 'pk'
     permission_classes = [AllowAny]  # IsAuthenticated
+    # lookup_field = 'pk'
     #lookup_url_kwarg = "abc"
 
 
@@ -82,9 +81,10 @@ class BlogDetailAPIView(RetrieveAPIView):
 @method_decorator(csrf_exempt, name='dispatch')
 class BlogUpdateAPIView(RetrieveUpdateAPIView):
     queryset = Blog.objects.all()
-    authentication_classes = (TokenAuthentication)
     serializer_class = BlogCreateSerializer
-    permission_classes = [IsAuthenticated, IsOwner]
+    permission_classes = [ IsOwnerOrReadOnly ]
+    lookup_field = 'pk'
+    authentication_classes = [ TokenAuthentication ]
 
     def perform_update(self, serializer):
         serializer.save(user=self.request.user)

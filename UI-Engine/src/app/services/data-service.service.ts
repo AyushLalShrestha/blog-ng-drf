@@ -22,6 +22,9 @@ export class DataService {
   getBlogDetail(pk: any = 1) {
     return this.http.get<Blog>(this.baseURL + '/blog/' + pk + '/');
   }
+  getUsersBlogs(pageNumber: Number = 1) {
+    return this.http.get<Blog[]>(this.baseURL + '/blog/list/?selfs_blog=' + true);
+  }
   newBlog(data) {
     const today = new Date().toISOString().slice(0, 10);
     const blogData = new FormData();
@@ -30,14 +33,35 @@ export class DataService {
     blogData.append('publish', today);
     
     if (data.image && data.image.name) {
-      console.log(data.image);
       blogData.append('image', data.image, data.image.name);
     }
 
-    console.log(blogData);
     return this.http.post(this.baseURL + '/blog/create/', blogData, {
       withCredentials: true
     });
+  }
+  editBlog(data: any= null, extract= true) {
+    const blogID = data.blogPK;
+    
+    if (extract) {
+      return this.http.get<Blog>(this.baseURL + '/blog/'+ blogID +'/update/', {
+        withCredentials: true
+      });
+    } else {
+      const today = new Date().toISOString().slice(0, 10);
+      const blogData = new FormData();
+      blogData.append('title', data.title);
+      blogData.append('content', data.content);
+      blogData.append('publish', today);
+    
+      if (data.image && data.image.name) {
+        blogData.append('image', data.image, data.image.name);
+      }
+
+      return this.http.put<Blog>(this.baseURL + '/blog/'+ blogID +'/update/', blogData, {
+        withCredentials: true
+      });
+    }
   }
   getUserProfiles() {
     return this.http.get<UserProfile[]>(this.baseURL + '/user/profiles/', { withCredentials: true });
@@ -48,13 +72,6 @@ export class DataService {
     formData.append('username', data.username);
     formData.append('password', data.password);
     return this.http.post(this.baseURL + '/user/api-token-login/', formData);
-
-    // const formData = new FormData();
-    // formData.append('CSRFToken', 'admin');
-    // formData.append('password', 'changeme');
-    // return this.http.post('https://10.45.3.122/Loginspect/extract?id=true', formData);
-
-
   }
   getSessionDetails() {
     return this.http.get<any>(this.baseURL + '/user/sessionDetails/', { withCredentials: true });
@@ -67,8 +84,7 @@ export class DataService {
 
     this._snackBar.openFromComponent(ShortMessageComponent, {
       duration: 2000,
-      data: data,
-      announcementMessage: 'THis is something'
+      data: data
     });
   }
 

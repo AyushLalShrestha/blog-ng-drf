@@ -3,10 +3,10 @@ import os
 import sys
 import logging
 
-logging.basicConfig(level=logging.DEBUG,
-                    format='%(asctime)-6s: %(levelname)s - %(message)s',
-                    datefmt='%Y-%m-%d %H:%M:%S',
-                    filename='/src/etc/var/log/webserver.log')
+# logging.basicConfig(level=logging.DEBUG,
+#                     format='%(asctime)-6s: %(levelname)s - %(message)s',
+#                     datefmt='%Y-%m-%d %H:%M:%S',
+#                     filename='/src/var/log/webserver.log')
 
 if __name__ == "__main__":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "APIEngine.settings")

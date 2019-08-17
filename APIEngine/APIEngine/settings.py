@@ -25,7 +25,9 @@ SECRET_KEY = '=@c5c10%pph)kqcte1vdq7x@q3nq3o0#_0qyq@a@t697uum)b#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', 'ayushLogpoint', 'blogsellbuy', '172.19.0.1', '172.19.0.2']
+ALLOWED_HOSTS = [
+    'localhost', 'ayushLogpoint', 'blogsellbuy',
+    '192.168.101.6', '172.19.0.1', '172.19.0.2']
 
 # Application definition
 
@@ -36,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+
     'rest_framework',
     'markdown_deux',
     'corsheaders',
@@ -67,6 +69,7 @@ CORS_ORIGIN_WHITELIST = (
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
+        # 'rest_framework.permissions.IsAuthenticatedOrReadOnly',
         # 'rest_framework.permissions.IsAuthenticated',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (

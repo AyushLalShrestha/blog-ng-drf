@@ -69,6 +69,7 @@ class BlogDetailSerializer(ModelSerializer):
     class Meta:
         model = Blog
         fields = [
+            'pk',
             'id',
             'user',
             'title',

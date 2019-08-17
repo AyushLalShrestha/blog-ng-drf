@@ -9,34 +9,64 @@ import { MatDialogModule, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angu
   styleUrls: ['./blog-add.component.css']
 })
 export class BlogAddComponent implements OnInit {
+  editAction: boolean;
+  blog: Blog;
+  
   title: String;
   content: String;
-  publishDate: String;
   selectedImage: File;
 
   constructor(private dataService: DataService,
-    public dialogRef: MatDialogRef<BlogAddComponent>) { }
+    public dialogRef: MatDialogRef<BlogAddComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) { 
+      this.blog = null;
+      this.editAction = false;
+    }
 
   ngOnInit() {
-    this.title = '';
-    this.content = '';
+    if (this.data && this.data.edit == true && this.data.blogPK){
+      this.editAction = true;
+      this.dataService.editBlog(this.data, true).subscribe(
+        detailedBlog => {
+          this.blog = detailedBlog;
+          this.blog.blog_pk = this.data.blogPK;
+          this.title = detailedBlog.title;
+          this.content = detailedBlog.content;
+        }
+      )
+    } else {
+      this.editAction = false;
+      
+    }
   }
 
   onSubmit(f) {
-    console.log(this.selectedImage);
     const data = {
       title: f.value.title,
       content: f.value.content,
       image: this.selectedImage
     };
-    this.dataService.newBlog(data).subscribe(
-      res => {
-        this.dataService.openSnackBar("Successfully posted");
-      },
-      err => {
-        this.dataService.openSnackBar("Post failed");
-      }
-    );
+    if (!this.editAction){
+      this.dataService.newBlog(data).subscribe(
+        res => {
+          this.dataService.openSnackBar("Successfully posted");
+        },
+        err => {
+          this.dataService.openSnackBar("Post failed");
+        }
+      );
+    } else {
+      data['blogPK'] = this.blog.blog_pk;
+      this.dataService.editBlog(data, false).subscribe(
+        res => {
+          this.dataService.openSnackBar("Successfully edited");
+        },
+        err => {
+          this.dataService.openSnackBar("Edit failed");
+        }
+      );
+    }
+    
 
   }
   onCloseClick(): void {

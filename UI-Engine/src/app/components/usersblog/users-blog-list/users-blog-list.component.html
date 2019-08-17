@@ -1,0 +1,33 @@
+<!--  Trying materialize table -->
+<mat-form-field>
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+  <mat-table #table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="{{column.id}}" *ngFor="let column of columnNames">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{column.value}} </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element[column.id]}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Actions </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <span class="btn btn-floating btn-small waves-effect waves-light green "
+          (click)="openBlogDetailDialog(element.blog_pk)">
+          <i class="small material-icons" aria-hidden="true">chrome_reader_mode</i>
+      </span> 
+
+      <span class="btn btn-floating btn-small waves-effect waves-light blue "
+          (click)="openBlogEditDialog(element.blog_pk)">
+          <i class="small material-icons" aria-hidden="true">edit</i>
+      </span> 
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <mat-paginator [length]="resultsLength" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>

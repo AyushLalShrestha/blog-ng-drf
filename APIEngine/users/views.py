@@ -49,10 +49,11 @@ class ProfileListAPIView(ListAPIView):
 
 
 def session_details(request):
+    """
+    Old session details, deprecated
+    """
     data = {
-        'logged_in_user': request.session.get('username', 'Nobody'),
-        'location': 'Nepal',
-        'enjoy': 'True True'
+        'logged_in_user': request.session.get('username', 'Nobody')
     }
     return JsonResponse(data)
 

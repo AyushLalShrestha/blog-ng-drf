@@ -1,23 +1,50 @@
 
-<form materialize novalidate #f="ngForm" (ngSubmit)="onSubmit(f)" class="example-container">
+<h1 mat-dialog-title>
+   <div *ngIf="editAction; else addBlog">
+     Edit Blog
+   </div>
+   <ng-template #addBlog>
+     Add Blog
+   </ng-template>
+</h1>
 
-   <mat-form-field>
-      <input matInput name="title" ngModel autocomplete="off" minlength="5" required #title="ngModel"
-         placeholder="Title">
-      <mat-error *ngIf="title.errors?.required && title.touched" class="alert alert-danger">Empty Title!</mat-error>
-   </mat-form-field>
+<div mat-dialog-content>
 
-   <mat-form-field>
-      <textarea matInput name="content" ngModel autocomplete="off" minlength="10" required #content="ngModel"
-         placeholder="Content"></textarea>
-      <mat-error *ngIf="content.errors?.required && content.touched" class="alert alert-danger">No Content!</mat-error>
-   </mat-form-field>
+   <form materialize novalidate #f="ngForm" (ngSubmit)="onSubmit(f)" class="example-container">
 
-   <mat-form-field>
-      <input  type="file" (change)="onImageChanged($event)" #imageInput>
-      <!-- <button matInput (click)="imageInput.click()">Select Image</button> -->
-   </mat-form-field>
+      <mat-form-field>
+         <input matInput name="title" ngModel autocomplete="off" minlength="5" required #title="ngModel"
+            placeholder="Title">
+         <mat-error *ngIf="title.errors?.required && title.touched" class="alert alert-danger">Empty Title!</mat-error>
+      </mat-form-field>
 
-   <input type="submit" class="btn" [disabled]="!f.valid" value="Submit">
+      <mat-form-field>
+         <textarea matInput ngModel name="content" autocomplete="off" minlength="10" required #content="ngModel"
+            placeholder="Content"></textarea>
+         <mat-error *ngIf="content.errors?.required && content.touched" class="alert alert-danger">No Content!</mat-error>
+      </mat-form-field>
 
-</form>
+
+      <!-- <input  type="file" class="file-field" (change)="onImageChanged($event)" #imageInput> -->
+      <div class = "file-field input-field">
+         <div class = "btn btn-small">
+            <span>Browse</span>
+            <input type = "file" (change)="onImageChanged($event)" #imageInput/>
+         </div>
+
+         <div class = "file-path-wrapper">
+            <input class = "file-path validate" type = "text"
+               placeholder = "Upload blog image" />
+         </div>
+      </div>
+
+
+      <input type="submit" class="btn btn-small" [disabled]="!f.valid" value="Submit">
+
+   </form>
+
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="">Cancel</button>
+</div>

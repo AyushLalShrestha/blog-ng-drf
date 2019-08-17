@@ -13,6 +13,7 @@ from rest_framework.views import APIView
 
 from APIEngine.settings import SECRET_KEY
 
+import logging as log
 jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
 jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
 
@@ -37,7 +38,10 @@ class TokenAuthentication(BaseAuthentication):
                 msg = 'Invalid token header'
                 raise exceptions.AuthenticationFailed(msg)
         except AuthenticationFailed as auth_ex:
-            return JsonResponse({'success': False, 'message': 'Authentication Failed. {}'.format(msg)})
+            return JsonResponse({
+                'success': False,
+                'message': 'Authentication Failed. {}'.format(msg)
+            })
 
         try:
             token = auth[1]
@@ -69,6 +73,7 @@ class TokenAuthentication(BaseAuthentication):
             )
             # if not user.token['token'] == token:
             #     raise exceptions.AuthenticationFailed({'Error': "Token mismatch",'status' :"401"})
+
         except jwt.ExpiredSignature or jwt.DecodeError or jwt.InvalidTokenError:
             return HttpResponse({'Error': "Token is invalid"}, status="403")
         except User.DoesNotExist:
@@ -81,6 +86,10 @@ class TokenAuthentication(BaseAuthentication):
 
 
 class UserLoginViewJwt(APIView):
+    """
+    From username and password, authenticate the user and send back the
+     JWT
+    """
     def post(self, request, *args, **kwargs):
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -101,6 +110,9 @@ class UserLoginViewJwt(APIView):
 
 
 def get_session_details(request):
+    """
+    Get the user from the authentication header
+    """
     authenticator = TokenAuthentication()
     auth = authenticator.authenticate(request)
     if len(auth) > 0 and auth[0] and isinstance(auth[0], User):
@@ -113,4 +125,7 @@ def get_session_details(request):
 
         return JsonResponse(user_details)
 
-    return JsonResponse({'error': True, 'message': "No session data"})
+    return JsonResponse({
+        'error': True,
+        'message': "No session data"
+    })

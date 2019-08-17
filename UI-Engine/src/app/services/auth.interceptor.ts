@@ -15,7 +15,7 @@ export class MyHttpInterceptor implements HttpInterceptor {
         
         if (idToken) {
             // const headers = new HttpHeaders().set('X-CSRFToken', '8ipjC3UCLyakUNp1t9C3ZeiQVtzBH2NerMY0ayMnb6qxCpY9gvXOrP3JrouFThWp');
-            const newHeader = {headers: req.headers.set("Authorization", "Bearer " + idToken)}
+            const newHeader = {headers: req.headers.set("Authorization", "Token " + idToken)}
             const cloned = req.clone(newHeader);
 
             return next.handle(cloned);

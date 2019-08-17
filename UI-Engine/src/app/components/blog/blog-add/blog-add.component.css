@@ -3,7 +3,11 @@
     flex-direction: column;
   }
   
-  .example-container > * {
-    width: 100%;
-  }
-  
+.example-container > * {
+  width: 100%;
+}
+
+.file-field {
+  margin-bottom: 25px;
+  margin-top: 25px;
+}
