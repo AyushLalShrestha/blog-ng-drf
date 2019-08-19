@@ -9,7 +9,7 @@ import { NgForm } from '@angular/forms';
 })
 export class UsersessionComponent implements OnInit {
   loggedInUser: any;
-  
+
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
@@ -30,18 +30,16 @@ export class UsersessionComponent implements OnInit {
         } else if (res['error']) {
           this.dataService.openSnackBar("Login failed", false);
         }
-
       },
       err => {
         this.dataService.openSnackBar("error logging in", false);
       }
     );
-
   }
   onLogout() {
     localStorage.removeItem("jwt_token");
     this.updateSessionDetails();
-    this.dataService.openSnackBar("Logged out! !");
+    this.dataService.openSnackBar("Logged out!!");
   }
   updateSessionDetails() {
     if (localStorage.getItem('jwt_token')) {
@@ -56,6 +54,6 @@ export class UsersessionComponent implements OnInit {
     } else {
       this.loggedInUser = null;
     }
-    
+
   }
 }

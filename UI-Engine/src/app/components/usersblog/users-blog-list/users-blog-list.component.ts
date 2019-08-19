@@ -48,15 +48,16 @@ export class UsersBlogListComponent implements OnInit {
   }
 
   updateUsersBlogs() {
-    this.dataService.getUsersBlogs().subscribe(blogs => {
-      this.blogs = blogs['results'];
-      this.dataSource = new MatTableDataSource(Array.from(this.blogs, blog => getBlogData(blog)));
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    },
-    err => {
-      this.dataService.openSnackBar("Error retrieving data", false);
-    });
+    this.dataService.getUsersBlogs().subscribe(
+      blogs => {
+        this.blogs = blogs['results'];
+        this.dataSource = new MatTableDataSource(Array.from(this.blogs, blog => getBlogData(blog)));
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      },
+      err => {
+        this.dataService.openSnackBar("Error retrieving data", false);
+      });
 
   }
 
@@ -66,7 +67,7 @@ export class UsersBlogListComponent implements OnInit {
       height: '700px',
       disableClose: false,
       hasBackdrop: true,
-      data: { blogPK: blogPK},
+      data: { blogPK: blogPK },
       autoFocus: false,
       maxHeight: '90vh',
       maxWidth: '80vw',
@@ -80,7 +81,7 @@ export class UsersBlogListComponent implements OnInit {
       height: '700px',
       disableClose: false,
       hasBackdrop: true,
-      data: { 
+      data: {
         blogPK: blogPK,
         edit: true
       },

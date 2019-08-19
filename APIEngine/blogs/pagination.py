@@ -4,7 +4,7 @@ from rest_framework.pagination import (
     )
 
 class BlogPageNumberPagination(PageNumberPagination):
-    page_size = 10
+    page_size = 25
 
 # class PostLimitOffsetPagination(LimitOffsetPagination):
 #     default_limit = 10

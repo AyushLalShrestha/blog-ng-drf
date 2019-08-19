@@ -1,29 +1,26 @@
 <h1 mat-dialog-title>
-   <div *ngIf="editAction; else addBlog">
-      Edit Blog
-   </div>
-   <ng-template #addBlog>
-      Add Blog
-   </ng-template>
+   <div *ngIf="editAction; else addBlog">Edit Blog</div>
+   <ng-template #addBlog>Add Blog</ng-template>
 </h1>
 
 <div mat-dialog-content>
    <div>
-      <form materialize novalidate [formGroup]="blogForm" (ngSubmit)="onSubmit()"
-         class="example-container">
+      <form materialize novalidate [formGroup]="blogForm" class="example-container">
          <mat-form-field>
-            <input matInput type="text" name="title" placeholder="title" formControlName="title"
-             autocomplete="off" minlength=5 required>
+            <mat-label>Title</mat-label>
+            <input matInput type="text" name="title" placeholder="Title for the Blog" 
+            formControlName="title" autocomplete="off" minlength=5 required>
          </mat-form-field>
 
          <mat-form-field>
-            <textarea matInput type="text" name="content" placeholder="content" formControlName="content"
-               autocomplete="off" minlength=10 required> </textarea>
+            <mat-label>Content</mat-label>
+            <textarea matInput type="text" name="content" placeholder="Content of the Blog ... .."
+             formControlName="content" autocomplete="off" minlength=10 required> </textarea>
          </mat-form-field>
 
          <div class="file-field input-field">
             <div class="btn btn-small pink darken-1">
-               <span>Browse</span>
+               <span> Browse</span>
                <input type="file" (change)="onImageChanged($event)" #imageInput />
             </div>
 
@@ -31,13 +28,12 @@
                <input class="file-path validate" type="text" placeholder="Upload blog image" />
             </div>
          </div>
-
-         <button type="submit" [disabled]="!blogForm.valid" class="btn btn-small">Submit</button>
       </form>
    </div>
 
 </div>
 
 <div mat-dialog-actions>
-   <button mat-button [mat-dialog-close]="" class="btn btn-small indigo lighten-5">Cancel</button>
+   <button mat-button [mat-dialog-close]="" class="btn btn-small indigo lighten-5 footer-button">Cancel</button>
+   <button mat-button (click)="onSubmit()" [disabled]="!blogForm.valid" class="btn btn-small blue right submit-button">Submit</button>
 </div>

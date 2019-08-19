@@ -7,6 +7,8 @@ import { MatSnackBar } from '@angular/material';
 
 import { Blog, User } from '../components/blog/blog.model';
 import { UserProfile } from '../components/user/user-profile.model';
+import { Observable } from 'rxjs';
+import { ResponseContentType } from '@angular/http';
 
 @Injectable()
 export class DataService {
@@ -31,7 +33,7 @@ export class DataService {
     blogData.append('title', data.title);
     blogData.append('content', data.content);
     blogData.append('publish', today);
-    
+
     if (data.image && data.image.name) {
       blogData.append('image', data.image, data.image.name);
     }
@@ -40,11 +42,11 @@ export class DataService {
       withCredentials: true
     });
   }
-  editBlog(data: any= null, extract= true) {
+  editBlog(data: any = null, extract = true) {
     const blogID = data.blogPK;
-    
+
     if (extract) {
-      return this.http.get<Blog>(this.baseURL + '/blog/'+ blogID +'/update/', {
+      return this.http.get<Blog>(this.baseURL + '/blog/' + blogID + '/update/', {
         withCredentials: true
       });
     } else {
@@ -53,12 +55,12 @@ export class DataService {
       blogData.append('title', data.title);
       blogData.append('content', data.content);
       blogData.append('publish', today);
-    
+
       if (data.image && data.image.name) {
         blogData.append('image', data.image, data.image.name);
       }
 
-      return this.http.put<Blog>(this.baseURL + '/blog/'+ blogID +'/update/', blogData, {
+      return this.http.put<Blog>(this.baseURL + '/blog/' + blogID + '/update/', blogData, {
         withCredentials: true
       });
     }
@@ -86,6 +88,9 @@ export class DataService {
       duration: 2000,
       data: data
     });
+  }
+  getImage(imageUrl: string): Observable<Blob> {
+    return this.http.get(imageUrl, { responseType: 'blob' });
   }
 
 }

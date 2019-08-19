@@ -11,3 +11,16 @@
   margin-bottom: 25px;
   margin-top: 25px;
 }
+
+textarea {
+  min-height: 20vh;
+}
+
+.submit-button{
+    /* background: #535876; */
+    /* padding: 10px 15px; */
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+}

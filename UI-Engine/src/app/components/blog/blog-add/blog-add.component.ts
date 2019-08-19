@@ -20,8 +20,10 @@ export class BlogAddComponent implements OnInit {
   });
 
   constructor(private dataService: DataService,
-              public dialogRef: MatDialogRef<BlogAddComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any) {
+    public dialogRef: MatDialogRef<BlogAddComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+    
+    // Differentiates new blog creation or old blog edit action
     this.editAction = false;
     this.blogPK = null;
   }
@@ -36,22 +38,33 @@ export class BlogAddComponent implements OnInit {
             content: new FormControl(detailedBlog.content)
           });
           this.blogPK = this.data.blogPK;
+
+          if (detailedBlog.image && detailedBlog.image != '') {
+            this.dataService.getImage(detailedBlog.image).subscribe(
+              data => {
+                this.selectedImage = new File([data], 'ayush', { type: 'image/jpeg' });
+                // this.createImageFromBlob(data);
+              }, error => {
+                console.log("Error loading images", error);
+              });
+          }
         }
       )
     } else {
       this.editAction = false;
     }
-    
+
   }
 
   onSubmit() {
     var values = this.blogForm.value;
-    
     const data = {
       title: values.title,
       content: values.content,
       image: this.selectedImage
     };
+    console.log(data);
+
     if (!this.editAction) {
       this.dataService.newBlog(data).subscribe(
         res => {
@@ -72,8 +85,6 @@ export class BlogAddComponent implements OnInit {
         }
       );
     }
-
-
   }
   onCloseClick(): void {
     this.dialogRef.close();
@@ -81,6 +92,17 @@ export class BlogAddComponent implements OnInit {
   onImageChanged(event) {
     const file = event.target.files[0];
     this.selectedImage = file;
+  }
+  createImageFromBlob(image: Blob) {
+    let reader = new FileReader();
+    reader.addEventListener("load", () => {
+      let imageToShow = reader.result; // here is the result you got from reader
+      console.log(imageToShow);
+    }, false);
+
+    if (image) {
+      reader.readAsDataURL(image);
+    }
   }
 
 }

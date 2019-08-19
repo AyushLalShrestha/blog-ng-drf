@@ -6,11 +6,9 @@ export interface BlogData {
     read_time: number;
     publish: Date;
     claps: number;
-  }
+}
 
-
-
-  export class Blog {
+export class Blog {
     public blog_pk: number;
     public title: string;
     public content: string;
@@ -20,9 +18,9 @@ export interface BlogData {
     public claps: number;
     public image: string;
 
-    constructor(blog_pk: number,title: string, content: string, read_time: number, publish: Date, claps: number,
+    constructor(blog_pk: number, title: string, content: string, read_time: number, publish: Date, claps: number,
         username: string, email: string, first_name: string, last_name: string, bio: string, location: string, phone: string
-        , image: string = null ) {
+        , image: string = null) {
         this.blog_pk = blog_pk;
         this.title = title;
         this.content = content;
