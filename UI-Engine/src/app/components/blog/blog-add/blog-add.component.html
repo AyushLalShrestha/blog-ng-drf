@@ -6,9 +6,10 @@
 <div mat-dialog-content>
    <div>
       <form materialize novalidate [formGroup]="blogForm" class="example-container">
+
          <mat-form-field>
             <mat-label>Title</mat-label>
-            <input matInput type="text" name="title" placeholder="Title for the Blog" 
+            <input matInput type="text" name="title" placeholder="Title for the Blog"
             formControlName="title" autocomplete="off" minlength=5 required>
          </mat-form-field>
 
@@ -17,6 +18,8 @@
             <textarea matInput type="text" name="content" placeholder="Content of the Blog ... .."
              formControlName="content" autocomplete="off" minlength=10 required> </textarea>
          </mat-form-field>
+
+         <tag-chips-component (tagSelect)="addTags($event)" [parentForm]="blogForm"> </tag-chips-component>
 
          <div class="file-field input-field">
             <div class="btn btn-small pink darken-1">

@@ -7,7 +7,8 @@ import {
   MatButtonModule, MatFormFieldModule, MatInputModule, MatRippleModule,
   MatCardModule, MatProgressSpinnerModule, MatMenuModule, MatIconModule,
   MatTableModule, MatCheckboxModule, MatToolbarModule, MatSnackBarModule,
-  MatSelectModule, MatSortModule, MatPaginatorModule, MatCheckbox
+  MatSelectModule, MatSortModule, MatPaginatorModule, MatCheckbox,
+  MatChipsModule, MatAutocompleteModule
 } from '@angular/material';
 
 import { BrowserModule } from '@angular/platform-browser';
@@ -21,16 +22,16 @@ import { AppComponent } from './app.component';
 import { DataService } from './services/data-service.service';
 import { MyHttpInterceptor } from './services/auth.interceptor';
 
-import { BlogComponent } from './components/blog/blog.component';
-import { BlogListComponent } from './components/blog/blog-list/blog-list.component';
 import { BlogDetailComponent } from './components/blog/blog-detail/blog-detail.component';
 import { BlogAddComponent } from './components/blog/blog-add/blog-add.component';
+import { BlogComponent } from './components/blog/blog.component';
+import { BlogListComponent } from './components/blog/blog-list/blog-list.component';
 import { UserComponent } from './components/user/user.component';
 import { UsersessionComponent } from './components/usersession/usersession.component';
-import { ShortMessageComponent } from './components/shared/snackbar/snackbar.component';
-
 import { UsersBlogComponent } from './components/usersblog/usersblog.component';
 import { UsersBlogListComponent } from './components/usersblog/users-blog-list/users-blog-list.component';
+import { ShortMessageComponent } from './components/shared/snackbar/snackbar.component';
+import { TagChipsComponent } from './components/shared/tagchips/tagchips.component';
 
 const appRoutes: Routes = [
   { path: '', component: BlogComponent },
@@ -41,12 +42,12 @@ const appRoutes: Routes = [
 
 @NgModule({
   declarations: [
-    AppComponent, BlogComponent, BlogAddComponent, BlogListComponent,
-    BlogDetailComponent,
-    UserComponent,
-    UsersessionComponent,
+    AppComponent, BlogComponent, UsersBlogComponent,
+    BlogAddComponent, BlogDetailComponent,
+    BlogListComponent, UsersBlogListComponent,
+    UsersessionComponent, UserComponent,
     ShortMessageComponent,
-    UsersBlogComponent, UsersBlogListComponent
+    TagChipsComponent
   ],
   imports: [
     BrowserModule,
@@ -72,12 +73,15 @@ const appRoutes: Routes = [
     MatTableModule,
     MatPaginatorModule,
     MatCheckboxModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatChipsModule,
+    MatAutocompleteModule
 
   ],
   providers: [
     DataService,
-    { provide: HTTP_INTERCEPTORS, useClass: MyHttpInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: MyHttpInterceptor, multi: true },
+    // { provide: MAT_CHIPS_DEFAULT_OPTIONS, useValue: { separatorKeyCodes: [ENTER, COMMA] } }
     // { provide: MatDialogRef, useValue: {} },
   ],
   bootstrap: [AppComponent],

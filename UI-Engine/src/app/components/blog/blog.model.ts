@@ -8,6 +8,7 @@ export class Blog {
     public publish: Date;
     public claps: number;
     public image: string;
+    public tags: String[] = [];
 
     constructor(blog_pk: number,title: string, content: string, read_time: number, publish: Date, claps: number,
         username: string, email: string, first_name: string, last_name: string, bio: string, location: string, phone: string

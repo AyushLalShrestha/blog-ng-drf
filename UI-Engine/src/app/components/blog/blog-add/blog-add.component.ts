@@ -3,6 +3,7 @@ import { Blog } from './../blog.model';
 import { DataService } from '../../../services/data-service.service';
 import { MatDialogModule, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormGroup, FormControl } from '@angular/forms';
+import { TagChipsComponent } from './../../../components/shared/tagchips/tagchips.component';
 
 @Component({
   selector: 'app-blog-add',
@@ -17,6 +18,7 @@ export class BlogAddComponent implements OnInit {
   blogForm = new FormGroup({
     title: new FormControl(''),
     content: new FormControl(''),
+    tags: new FormControl('')
   });
 
   constructor(private dataService: DataService,
@@ -33,9 +35,10 @@ export class BlogAddComponent implements OnInit {
       this.editAction = true;
       this.dataService.editBlog(this.data, true).subscribe(
         detailedBlog => {
-          this.blogForm = new FormGroup({
-            title: new FormControl(detailedBlog.title),
-            content: new FormControl(detailedBlog.content)
+          this.blogForm.setValue({
+            title: detailedBlog.title,
+            content: detailedBlog.content,
+            tags: detailedBlog.tags || ['']
           });
           this.blogPK = this.data.blogPK;
 
@@ -58,33 +61,35 @@ export class BlogAddComponent implements OnInit {
 
   onSubmit() {
     var values = this.blogForm.value;
+    console.log(values);
     const data = {
       title: values.title,
       content: values.content,
       image: this.selectedImage
     };
-    console.log(data);
+    return;
+    // console.log(data);
 
-    if (!this.editAction) {
-      this.dataService.newBlog(data).subscribe(
-        res => {
-          this.dataService.openSnackBar("Successfully posted");
-        },
-        err => {
-          this.dataService.openSnackBar("Post failed");
-        }
-      );
-    } else {
-      data['blogPK'] = this.blogPK;
-      this.dataService.editBlog(data, false).subscribe(
-        res => {
-          this.dataService.openSnackBar("Successfully edited");
-        },
-        err => {
-          this.dataService.openSnackBar("Edit failed");
-        }
-      );
-    }
+    // if (!this.editAction) {
+    //   this.dataService.newBlog(data).subscribe(
+    //     res => {
+    //       this.dataService.openSnackBar("Successfully posted");
+    //     },
+    //     err => {
+    //       this.dataService.openSnackBar("Post failed");
+    //     }
+    //   );
+    // } else {
+    //   data['blogPK'] = this.blogPK;
+    //   this.dataService.editBlog(data, false).subscribe(
+    //     res => {
+    //       this.dataService.openSnackBar("Successfully edited");
+    //     },
+    //     err => {
+    //       this.dataService.openSnackBar("Edit failed");
+    //     }
+    //   );
+    // }
   }
   onCloseClick(): void {
     this.dialogRef.close();
@@ -103,6 +108,11 @@ export class BlogAddComponent implements OnInit {
     if (image) {
       reader.readAsDataURL(image);
     }
+  }
+  addTags(selectedTags: any[]){
+    console.log(selectedTags);
+    this.blogForm.patchValue({tags: selectedTags});
+    console.log(this.blogForm.value);
   }
 
 }
