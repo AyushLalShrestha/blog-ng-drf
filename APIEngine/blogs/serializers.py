@@ -16,7 +16,8 @@ class BlogCreateSerializer(ModelSerializer):
             'title',
             'content',
             'publish',
-            'image'
+            'image',
+            'tags'
         ]
 
 
@@ -55,6 +56,7 @@ class BlogListSerializer(ModelSerializer):
             'read_time',
             'publish',
             'claps',
+            'tags'
         ]
 
 
@@ -79,6 +81,7 @@ class BlogDetailSerializer(ModelSerializer):
             # 'html',
             'publish',
             'image',
+            'tags'
             # 'comments',
         ]
 

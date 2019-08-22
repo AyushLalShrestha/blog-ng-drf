@@ -17,15 +17,19 @@ export class Blog {
     public publish: Date;
     public claps: number;
     public image: string;
+    public tags: String[] = [];
 
-    constructor(blog_pk: number, title: string, content: string, read_time: number, publish: Date, claps: number,
-        username: string, email: string, first_name: string, last_name: string, bio: string, location: string, phone: string
+    constructor(blog_pk: number, title: string, content: string,
+         read_time: number, publish: Date, claps: number, tags: string[],
+        username: string, email: string, first_name: string, 
+        last_name: string, bio: string, location: string, phone: string
         , image: string = null) {
         this.blog_pk = blog_pk;
         this.title = title;
         this.content = content;
         this.read_time = read_time;
         this.publish = publish;
+        this.tags = tags;
         this.user = new User(username, email, first_name, last_name, bio, location, phone);
         this.image = image;
     }

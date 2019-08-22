@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.conf import settings
+from django.contrib.postgres.fields import ArrayField
 from django.db import models
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
@@ -16,7 +17,7 @@ def upload_location(instance, filename):
     # return "%s/%s.%s" %(instance.id, instance.id, extension)
     """
     instance.__class__ gets the model Blog. We must use this method because the model is defined below.
-    Then create a queryset ordered by the "id"s of each object, 
+    Then create a queryset ordered by the "id"s of each object,
     Then we get the last object in the queryset with `.last()`
     Which will give us the most recently created Model instance
     We add 1 to it, so we get what should be the same id as the the post we are creating.
@@ -43,6 +44,8 @@ class Blog(models.Model):
     width_field = models.IntegerField(default=0)
     content = models.TextField()
     draft = models.BooleanField(default=False)
+    tags = ArrayField(models.CharField(max_length=15, null=True, blank=True),
+                      null=True, blank=True)
     publish = models.DateField(auto_now=False, auto_now_add=False)
     read_time = models.IntegerField(default=0)
     claps = models.IntegerField(default=0)

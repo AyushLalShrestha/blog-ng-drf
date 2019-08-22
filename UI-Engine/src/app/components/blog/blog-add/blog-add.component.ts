@@ -20,6 +20,7 @@ export class BlogAddComponent implements OnInit {
     content: new FormControl(''),
     tags: new FormControl('')
   });
+  tags: string[] = [];
 
   constructor(private dataService: DataService,
     public dialogRef: MatDialogRef<BlogAddComponent>,
@@ -41,11 +42,14 @@ export class BlogAddComponent implements OnInit {
             tags: detailedBlog.tags || ['']
           });
           this.blogPK = this.data.blogPK;
+          this.tags = detailedBlog.tags || ['defaultWala'];
 
           if (detailedBlog.image && detailedBlog.image != '') {
             this.dataService.getImage(detailedBlog.image).subscribe(
               data => {
-                this.selectedImage = new File([data], 'ayush', { type: 'image/jpeg' });
+                let imgArr = detailedBlog.image.split('/');
+                let imgName = imgArr[imgArr.length-1];
+                this.selectedImage = new File([data], imgName, { type: 'image/jpeg' });
                 // this.createImageFromBlob(data);
               }, error => {
                 console.log("Error loading images", error);
@@ -61,48 +65,48 @@ export class BlogAddComponent implements OnInit {
 
   onSubmit() {
     var values = this.blogForm.value;
-    console.log(values);
     const data = {
       title: values.title,
       content: values.content,
-      image: this.selectedImage
+      image: this.selectedImage,
+      // tags: values.tags
     };
-    return;
-    // console.log(data);
-
-    // if (!this.editAction) {
-    //   this.dataService.newBlog(data).subscribe(
-    //     res => {
-    //       this.dataService.openSnackBar("Successfully posted");
-    //     },
-    //     err => {
-    //       this.dataService.openSnackBar("Post failed");
-    //     }
-    //   );
-    // } else {
-    //   data['blogPK'] = this.blogPK;
-    //   this.dataService.editBlog(data, false).subscribe(
-    //     res => {
-    //       this.dataService.openSnackBar("Successfully edited");
-    //     },
-    //     err => {
-    //       this.dataService.openSnackBar("Edit failed");
-    //     }
-    //   );
-    // }
+    if (!this.editAction) {
+      this.dataService.newBlog(data).subscribe(
+        res => {
+          this.dataService.openSnackBar("Successfully posted");
+        },
+        err => {
+          this.dataService.openSnackBar("Post failed");
+        }
+      );
+    } else {
+      data['blogPK'] = this.blogPK;
+      this.dataService.editBlog(data, false).subscribe(
+        res => {
+          this.dataService.openSnackBar("Successfully edited");
+        },
+        err => {
+          this.dataService.openSnackBar("Edit failed");
+        }
+      );
+    }
   }
   onCloseClick(): void {
     this.dialogRef.close();
   }
   onImageChanged(event) {
     const file = event.target.files[0];
+    if (file.size/(1024*1024) > 5){
+      this.dataService.openSnackBar("Image larger than 5 MB");
+      return ;
+    }
     this.selectedImage = file;
   }
   createImageFromBlob(image: Blob) {
     let reader = new FileReader();
     reader.addEventListener("load", () => {
       let imageToShow = reader.result; // here is the result you got from reader
-      console.log(imageToShow);
     }, false);
 
     if (image) {
@@ -110,9 +114,7 @@ export class BlogAddComponent implements OnInit {
     }
   }
   addTags(selectedTags: any[]){
-    console.log(selectedTags);
     this.blogForm.patchValue({tags: selectedTags});
-    console.log(this.blogForm.value);
   }
 
 }
