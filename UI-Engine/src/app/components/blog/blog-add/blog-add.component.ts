@@ -69,7 +69,7 @@ export class BlogAddComponent implements OnInit {
       title: values.title,
       content: values.content,
       image: this.selectedImage,
-      // tags: values.tags
+      tags: values.tags.join(",")
     };
     if (!this.editAction) {
       this.dataService.newBlog(data).subscribe(
@@ -85,6 +85,7 @@ export class BlogAddComponent implements OnInit {
       this.dataService.editBlog(data, false).subscribe(
         res => {
           this.dataService.openSnackBar("Successfully edited");
+          this.dialogRef.close();
         },
         err => {
           this.dataService.openSnackBar("Edit failed");

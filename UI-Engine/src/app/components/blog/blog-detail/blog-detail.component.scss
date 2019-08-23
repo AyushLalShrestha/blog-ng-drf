@@ -1,11 +1,11 @@
 .blog-content{
-    color: #616161;
-    background-color: lighten(#edeef1, 1%);
+    color: #000000;
+    background-color: lighten(#edeef1, 20%);
     padding-left: 5px;
     padding-right: 5px;
 }
 
 .blog-title-image{
-    max-height: '10vh';
-    max-width: '10vh';
+    max-height: '10vh' !important;
+    max-width: '10vw' !important;
 }

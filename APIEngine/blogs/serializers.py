@@ -1,3 +1,5 @@
+
+import logging as log
 from rest_framework.serializers import (HyperlinkedIdentityField, SerializerMethodField,
                                         ModelSerializer
                                         )
@@ -19,7 +21,13 @@ class BlogCreateSerializer(ModelSerializer):
             'image',
             'tags'
         ]
+    
+    def to_internal_value(self, data):
+        ret = super().to_internal_value(data)
+        if ret.get('tags'):
+            ret['tags'] = ret['tags'][0].split(",")
 
+        return ret
 
 # for BLOG LIST
 class BlogProfileListSerializer(ModelSerializer):

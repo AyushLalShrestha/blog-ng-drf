@@ -56,16 +56,12 @@ export class DataService {
       blogData.append('title', data.title);
       blogData.append('content', data.content);
       blogData.append('publish', today);
-      // blogData.append('tags', JSON.stringify(data.tags));
+      blogData.append('tags', data.tags);
 
       if (data.image && data.image.name) {
-        console.log(data.image);
         blogData.append('image', data.image, data.image.name);
       }
-
-      blogData.forEach(value => {
-        console.log(value);
-      })
+      
       return this.http.put<Blog>(this.baseURL + '/blog/' + blogID + '/update/', blogData, {
         withCredentials: true
       });
